@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Rau củ quả</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--  CSS -->
+    <link rel="stylesheet" href="/assets_user/bootstrap-4.3.1-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets_user/css/product-item.css">
+    <link rel="stylesheet" href="/assets_user/css/subcribe-panel.css">
+    <link rel="stylesheet" href="/assets_user/css/post.css">
+    <link rel="stylesheet" href="/assets_user/css/left-product-list.css">
+    <link rel="stylesheet" href="/assets_user/css/style.css" />
+    <link rel="stylesheet" href="/assets_user/css/listPost.css">
+    <link rel="stylesheet" href="/assets_user/css/detail-page.css" />
+    <link rel="stylesheet" href="/assets_user/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css">
+    <link rel="stylesheet" href="/assets_user/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets_user/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/assets_user/css/knowledge-content.css">
+    <link rel="stylesheet" href="/assets_user/css/footer.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,700,700i,900,900i&display=swap"
+        rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="assets_user/css/reset.css" /> -->
+    <link rel="stylesheet" href="/assets_user/css/responsive.css" />
+    <link rel="stylesheet" href="/assets_user/fontawesome-free/css/all.css"></script>
+    <!-- --->
+    <script src="/assets_user/jquery/jquery-3.4.1.min.js"></script>
+    <script src="/assets_user/bootstrap-4.3.1-dist/js/bootstrap.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/assets_admin/sparksuite-simplemde-markdown-editor-6abda7a/dist/simplemde.min.css" />
+    <link rel="stylesheet" href="/assets_user/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets_user/OwlCarousel2-2.3.4/dist/assets/owl.carousel.css">
+  <link rel="stylesheet" href="/assets_user/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.css">
+  <link rel="stylesheet" href="/assets_user/css/slide-homepage.css">
+  <link rel="stylesheet" href="/assets_user/css/comment.css" />
+  <link rel="stylesheet" href="/assets_user/css/Cart.css">
+  <link rel="stylesheet" href="/assets_user/css/intro-page.css">
+
+  <script src="/assets_admin/sparksuite-simplemde-markdown-editor-6abda7a/dist/simplemde.min.js">
+ 
+    </script>
+    <script>
+      function parseNumber(num)
+    {
+        let arr = [];
+        while(num >= 1000){
+        
+            arr.unshift(num%1000 == 0 ? '000': num%1000 < 100? '0'+num%1000 : num%1000);
+            num= parseInt(num/1000);
+        }
+        arr.unshift(num%1000);
+        return arr.join(',');
+    }
+    function parseDate(str)
+    {
+        const date = new Date(str.substr(1,10));
+        return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}` 
+    }
+    </script>
+</head>

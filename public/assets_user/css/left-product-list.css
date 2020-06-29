@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+ 
+}
+
+body {
+    font-family: "Roboto Slab", sans-serif;
+    color: #353535;
+}
+
+.imgWidth {
+    width: 100%;
+}
+
+
+.left-product-list ul li {
+    padding: 15px 20px;
+    list-style: none;
+    margin-bottom: .3em;
+    text-align: left;
+    margin: 0;
+    text-transform: capitalize;
+    border-top:solid 1px #ebe1e1;
+}
+
+.left-product-list ul {
+    line-height: 1.6;
+    font-size: 14px;
+    font-weight: bold;
+    border: 0px solid #ddd;
+    border-radius: 0px;
+    padding: 0;
+    background-color: #fff;
+    list-style: none;
+    margin: 0;
+}
+
+.left-product-list .title {
+    background-color: #86ba09;
+    padding: 10px 20px;
+    color: #fff;
+    font-weight: 600;
+   
+
+}
+
+.left-product-list {
+    height: auto;
+    border-radius: 3% 3% 0% 0%;
+    border: 0.5px solid #d2d2d2;
+    overflow: hidden;
+    padding: 0;
+}
+
+.left-product-list ul li .right p {
+    color: #86ba09;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.left-product-list ul li .left {
+    width: 60px;
+    height: 60px;
+    float: left;
+}
+
+.left-product-list ul li .right {
+    margin-left: 70px;
+}
+.left-product-list ul li a{
+    text-decoration: none;
+    color:#8cb341;
+    display: inline-block;
+    width: 100%;
+}
+.left-product-list ul li:hover p,
+.left-product-list ul li:hover span {
+    color: #fff !important;
+}
+.left-product-list ul li:hover {
+    background-color: #63D471!important;
+}
+.left-product-list ul li:hover a{
+    color: #fff;
+}
+.active-title{
+    background-color:#63D471 !important;
+}
+
+.left-product-list ul li:nth-child(odd) {
+    background-color: #f8f8f8;
+}
+
+.left-product-list ul li .right p {
+    text-transform: lowercase;
+}

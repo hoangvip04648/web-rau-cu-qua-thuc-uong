@@ -1,0 +1,149 @@
+
+<section class="top-nav">
+    <div class="top-nav-left">
+        <div class="logo">
+
+            <a href="/">Foods and Fruits</a>
+        </div>
+        <div class="menu">
+            <ul>
+                <li class="menu-item">
+                    <a id="menu-sub" href="/page/cua-hang">
+                        Cửa hàng
+                    </a>
+                </li>
+                <li class="menu-item"><a href="/page/gioi-thieu">Giới thiệu</a></li>
+                <li class="menu-item"><a href="/page/tham-khao">Tham khảo</a></li>
+                <li class="menu-item" id="contact_desktop"><a href="#">Liên hệ</a></li>
+                <li class="menu-item display"><a href="/page/login">Đăng nhập</a></li>
+                <li class="menu-item display"><a href="/page/sign-up">Đăng ký</a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="top-nav-right">
+        <span data-toggle="modal" data-target=".search-modal"
+            style="color:#86ba09;cursor: pointer;margin-right: 10px;"><i style="font-size: 19px;"
+                class="fas fa-search"></i> </span>
+        <a href="/page/gio-hang" style="position: relative;;text-decoration: none;color:#86ba09; margin-right: 10px;"><i
+                style="font-size: 19px;" class="fas fa-shopping-cart"></i><span id="cart-index"
+                style="position: absolute;background:red;width:20px;height:20px;top:-15px;left:20px;font-size: 14px;color: #71F79F;font-weight: bold;text-align: center;color:white"></span></a>
+    </div>
+    <div class="clearfix"></div>
+
+    <!---------menu mobile--------------->
+    <span id="icon-menu"><i class="fa fa-bars"></i></span>
+    <div class="menu-mobile">
+        <ul>
+            <li class="menu-mb-item">
+                <a id="menu-mb-sub" href="/page/cua-hang">
+                    Cửa hàng
+                </a>
+            </li>
+            <li class="menu-mb-item"><a href="/page/gioi-thieu">Giới thiệu</a></li>
+            <li class="menu-mb-item"><a href="#">Tham khảo</a></li>
+            <li class="menu-mb-item" id="contact_mobile"><a href="#">Liên hệ</a></li>
+            <li class="menu-mb-item display"><a href="#">Đăng nhập</a></li>
+            <li class="menu-mb-item display"><a href="#">Đăng ký</a></li>
+        </ul>
+    </div>
+    <div id="wrapper"></div>
+</section>
+
+<div class="modal fade search-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <h4 class="pt-2" style="padding-left: 20px;text-transform: capitalize; ">Tìm kiếm</h4>
+            <div class="input-group mb-3 pl-3 pr-3">
+                <input id="search-input" type="text" class="form-control" aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <ul class="result-container">
+
+
+            </ul>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+function logOut(){
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        location.reload();
+    }
+
+    function updateNumberItem() {
+        const cart = localStorage.getItem('cart');
+        if (cart == null || cart == []) {
+            $('#cart-index').text(0);
+            $('#cart-index').css({
+                'border-radius': '50%',
+            });
+        } else {
+            $('#cart-index').text(JSON.parse(cart).length);
+            $('#cart-index').css({
+                'border-radius': '50%',
+            });
+        }
+    }
+    updateNumberItem();
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (user != null) {
+        $('.display').css("display", 'none');
+        $('.top-nav-right').append(
+            `<div class="dropdown">
+        <a href="#" id="link_avatar" class="drop-btn"><img src="${user.avatar}"  alt="Avatar" class="avatar ml-2"
+            style="margin-bottom:0.28em; vertical-align: middle;width: 25px;height: 25px;border-radius: 50%;" nerror="this.src='https://s.pngix.com/pngfile/s/468-4685538_bear-default-avatar-default-avatar-hd-png-download.png'"></a>
+        <div class="dropdown-content">
+            <a href="/page/profile/${user._id}">Hồ sơ của tui</a>
+            <a href="page/doi-mat-khau">Thay đổi mật khẩu</a>
+            <a href="#" style="color: #00bfa5;"  onclick="logOut()">Đăng xuất</a>
+        </div>
+    </div>
+        `
+        )
+    }
+
+    $('#search-input').keyup((e) => {
+        console.log(e.target.value);
+        $.ajax({
+            url: `/san-pham/search-by-string/:${e.target.value}`,
+            method: 'get',
+            success: (res) => {
+                console.log(res);
+                $('.result-container').html(res.products.map(item =>
+                    `<li>
+                        <a href="/page/san-pham/${item._id}" class="result-item m-2" style="color:#86ba09; text-decoration:none; text-transform:capitalize">
+                            <img class="thumbnail-result" style="border-radius:25%" src="/product-image/${item.image[0]}" />
+                            ${item.name}
+                        </a>
+                    </li>`
+                ))
+            },
+            error: err => {
+                console.log(err);
+            }
+        })
+    })
+    $('#contact_desktop').click(function () {
+        $('html, body').animate({
+            scrollTop: $("#footer").offset().top
+        }, 700);
+    });
+    $('#contact_mobile').click(function () {
+        $('.menu-mobile').css("margin-left", '-250px');
+        $('#wrapper').css("display", "none");
+        $('html, body').animate({
+            scrollTop: $("#footer").offset().top
+        }, 700);
+    });
+
+
+  
+</script>
+<!--end navigation-->

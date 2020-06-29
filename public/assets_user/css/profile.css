@@ -1,0 +1,239 @@
+
+    .form-control {
+        border-color: #86ba09 !important;
+    }
+
+    .form-control:focus {
+        border-color: #4b6809 !important;
+    }
+
+    .nav-tabs>li>a {
+        color: rgba(102, 102, 102, 0.85);
+    }
+
+    .nav-tabs>li.active>a {
+        color: #86ba09 !important;
+    }
+
+    .info-profile-basic p {
+        font-size: 1.1em;
+    }
+
+    .info-profile-basic p i {
+        color: #86ba09;
+    }
+
+
+
+    /* test */
+
+    .table-users .header {
+        background-color: #32585c;
+        color: #a4e411;
+        font-weight: bold;
+        font-size: 1.5em;
+        padding: 1rem;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .table-users img {
+        border-radius: 50%;
+        height: 60px;
+        width: 60px;
+    }
+
+    .table-users {
+        border: 1px solid #327a81;
+        border-radius: 10px;
+        box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+        max-width: calc(100% - 2em);
+        margin: 1em auto;
+        overflow: hidden;
+        width: 800px;
+    }
+
+    .table-users table {
+        width: 100%;
+    }
+
+    .table-users table td,
+    table th {
+        color: #2b686e;
+        padding: 10px;
+    }
+
+    .table-users table td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .table-users table td:last-child {
+        font-size: 0.95em;
+        line-height: 1.4;
+       ;
+    }
+
+    .table-users table th {
+        background-color: #daeff1;
+        font-weight: 300;
+    }
+
+    .table-users table tr:nth-child(2n) {
+        background-color: white;
+    }
+
+    .table-users table tr:nth-child(2n+1) {
+        background-color: #edf7f8;
+    }
+
+    @media screen and (max-width: 1200px) {
+        .img-responsive {
+            max-width: 30% !important;
+            margin: 0 auto;
+        }
+
+        .name-user-profile {
+            text-align: center;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+
+        .table-users table,
+        .table-users tr,
+        .table-users td {
+            display: block;
+        }
+
+        .table-users td:first-child {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100px;
+        }
+
+        .table-users td:not(:first-child) {
+            clear: both;
+            margin-left: 100px;
+            padding: 4px 80px 4px 110px;
+            position: relative;
+            text-align: left;
+        }
+
+        .table-users td:not(:first-child):before {
+            color: #91ced4;
+            content: '';
+            display: block;
+            left: 0;
+            position: absolute;
+        }
+
+        .table-users td:nth-child(2):before {
+            content: 'Tên Sản Phẩm: ';
+        }
+
+        .table-users td:nth-child(3):before {
+            content: 'Ngày Mua Hàng: ';
+        }
+
+        .table-users td:nth-child(4):before {
+            content: 'Số Lượng: ';
+        }
+
+        .table-users td:nth-child(5):before {
+            content: 'Tổng Số Tiền: ';
+        }
+
+        .table-users tr {
+            padding: 10px 0;
+            position: relative;
+        }
+
+        .table-users tr:first-child {
+            display: none;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+
+        .imaging-width-table {
+            max-width: 300px;
+        }
+
+        .name-user-profile h5 {
+            text-align: center;
+        }
+
+        h4 {
+            font-size: 0.85em !important;
+        }
+
+        .info-profile-basic p {
+            font-size: 0.9em;
+        }
+
+        .table-users .header {
+            background-color: #86ba09;
+            color: white;
+            font-size: 2em;
+            font-weight: 700;
+            padding: 0;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        .table-users img {
+            border: 3px solid;
+            border-color: #daeff1;
+            height: 100px;
+            margin: 0.5rem 0;
+            width: 100px;
+        }
+
+        .table-users tbody {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .table-users td:first-child {
+            background-color: #c8e7ea;
+            border-bottom: 1px solid #91ced4;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            top: 0;
+            transform: translateY(0);
+            width: 100%;
+        }
+
+        .table-users td:not(:first-child) {
+            margin: 0;
+            padding: 5px 1em;
+            width: 100%;
+        }
+
+        .table-users td:not(:first-child):before {
+            font-size: 0.8em;
+            padding-top: 0.3em;
+            position: relative;
+        }
+
+        .table-users td:last-child {
+            padding-bottom: 1rem !important;
+        }
+
+        .table-users tr {
+            background-color: white !important;
+            border: 1px solid #6cbec6;
+            border-radius: 10px;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+            margin: 0.5rem 0;
+            padding: 0;
+        }
+
+        .table-users {
+            border: none;
+            box-shadow: none;
+            overflow: visible;
+        }
+    }

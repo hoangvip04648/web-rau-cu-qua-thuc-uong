@@ -1,0 +1,33 @@
+.user-rate {
+    text-align: center;
+}
+
+.user-rate p {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.user-rate span{
+    font-size: 0.8em;
+    color: #999;
+}
+.rate .title-rate{
+    font-size: 1em;
+    font-weight: 500;
+}
+.rate p{
+    font-size: 0.8em;
+    color: #83ab09;
+}
+.content-rate p{
+    font-size: 0.9em;
+}
+.star-rate i {
+    color: #ffc120;
+}
+.box-comment{
+    box-shadow: -7px 0px 0px 0px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}

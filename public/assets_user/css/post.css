@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+
+}
+
+body {
+    font-family: "Roboto Slab", sans-serif;
+    color: #353535;
+    line-height: 1.6;
+    height: auto;
+}
+
+.imgWidth {
+    width: 100%;
+}
+
+
+.baiViet {
+    height: 350px;
+    /* margin: 50px; */
+    transition: filter .6s, opacity .6s, transform .6s, box-shadow .3s;
+    border: 1px solid rgba(33, 33, 33, .2);
+    border-top: none;
+}
+
+.baiViet:hover {
+    box-shadow: 0 0 11px rgba(33, 33, 33, .5);
+}
+
+.baiViet:hover .post .content .noiDung p {
+    color: #86ba09;
+}
+
+.baiViet .post {
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.baiViet .post .pic {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 175px;
+}
+.baiViet .post .pic img{
+    height: 190px;
+    width:90%;
+    object-fit: cover;
+}
+
+
+
+
+.baiViet .post .date {
+    position: absolute;
+    z-index: 10;
+    background-color: #86ba09;
+    width: 45px;
+    height: 45px;
+    color: #fff;
+    padding-top: 5px;
+    font-weight: bold;
+    line-height: 1;
+    top: 30px;
+    /* left: 0%; */
+
+}
+
+.baiViet .post .date span {
+    font-size: 17px;
+}
+
+.baiViet .post .date p {
+    font-size: 11px;
+}
+
+.baiViet .post .content {
+    position: absolute;
+    top: 58%;
+    width:90%;
+    padding: 0 10px;
+    overflow: hidden;
+}
+
+.baiViet .post .content h5 {  
+    height: 2.6em;
+    padding:0 10px;
+    color: #17161f;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.baiViet .post .content .gachKe {
+    max-width: 35px;
+    display: block;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 1em 0 1em;
+    width: 100%;
+    max-width: 30px;
+    margin-top: 0.2em;
+    margin-bottom: .5em;
+    height: 2px;
+}
+
+.baiViet .post .content .noiDung p {
+    margin-top: .1em;
+    margin-bottom: .1em;
+    font-size: .9em;
+    color: #444444;
+    font-weight: 500;
+    transition: .4s;
+    padding: 0 10px;
+    height:4rem;
+}

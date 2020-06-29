@@ -1,0 +1,97 @@
+  <!-- Begin Page Content -->
+  <div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800" align="center">Danh sách bài viết</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Tên bài viết</th>
+                <th>Hình ảnh</th>
+                <th>Lần cuối chỉnh sửa</th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="reference">
+                <% data.forEach((item,index )=> {%>
+                <tr id="<%= item._id %>">
+                    <td style="vertical-align: middle;"><%= item.title %></td>
+                    <td style="text-align: center;"><img src="<%= item.image %>"  width="auto" height="100" /></td>
+                    <td style="vertical-align: middle;"><%= item.date %></td>
+                    <td style="vertical-align: middle;"><button onclick="removeReference('<%= item._id %>')" class="btn btn-primary btn-block">xóa</button></td>
+                    <td style="vertical-align: middle;"><button onclick="redirect('<%= item._id %>')" class="btn btn-primary btn-block">sửa</button></td>
+                    <td style="vertical-align: middle;"><a href="/admin/tham-khao/danh-sach-bai-viet/preview/<%= item._id %>" class="btn btn-primary btn-block">Preview</a></td>
+                </tr>
+                <%}) %>
+           
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+<script>
+
+    function redirect(id)
+    {
+        window.location.replace('/admin/tham-khao/danh-sach-bai-viet/'+id);
+    }
+
+    function removeReference(id){
+      const comfirm=window.confirm('ban co chac chan muon xoa bai viet nay khong?')
+      if(comfirm)
+      {
+        $.ajax({
+              url: '/admin/tham-khao/xoa-bai-viet/'+id,
+              method: 'DELETE',
+              headers:{
+                  'x-access-token':localStorage.getItem('x-access-token')
+              },
+              dataType:'json',
+              success:  (res) => {
+                document.getElementById(id).remove();
+              },
+              error:(err) => {
+                  console.log(err);
+              }
+              
+          });
+      }
+      else
+      {
+        return '';
+      }
+     
+      
+     }
+    //  function render(data)
+    //  {
+    
+    //    let references="";
+    //     data.forEach(item => {
+    //     references += 
+    //     `<tr>
+    //         <td>${item.title}</td>
+    //         <td>${item.image}</td>
+    //         <td>${item.date}</td>
+    //         <td><button class="btn btn-primary btn-block">Sửa</button></td>
+    //         <td><button class="btn btn-primary btn-block" >xóa</button></td>
+    //     </tr>`
+    //     });
+    //    $('#reference').html(
+    //      references
+    //    );
+    //  }
+     
+</script>

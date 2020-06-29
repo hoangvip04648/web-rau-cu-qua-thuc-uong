@@ -1,0 +1,10 @@
+<h2 style="text-align: center;font-weight: bold;; padding: 10px" class="heading"><%= data.title %></h2>
+<div id="preview-reference" class="container">
+    <%= data.content %>
+</div>
+
+<script>
+    const reference=document.getElementById('preview-reference');
+    reference.innerHTML=reference.textContent;
+
+</script>

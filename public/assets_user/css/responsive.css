@@ -1,0 +1,323 @@
+@media screen and (max-width: 900px){
+  
+    .top-nav{
+        height:60px;
+    }
+    #icon-menu{
+        display: block;
+        position: fixed;
+        top:1.6vh;
+        left:3vw;
+        font-size: 25px;
+        cursor: pointer;
+        z-index: 11;
+        color:#86ba09;
+    }
+   
+    .top-nav-left{
+        width:60%;
+        height:100%;
+    }
+    .top-nav-right{
+        width:40%;
+    }
+    .menu{
+        display: none;
+    }
+    .logo{
+        width:100%;
+        text-align:center;
+        height:100%;
+    }
+    .logo a{
+        padding: 0;
+        font-size:19px;
+        height: 100%;
+       text-align: left;
+        transform: translateY(25%);
+    }
+    .top-nav-right a{
+        font-size: 15px;
+        padding-left:0;
+        padding-right:0;
+    }
+    .slide h1{
+      
+        font-size:5vw;
+    }
+    .slide h1,.slide h3,.book-now{
+        text-align: center;
+    }
+    .slide h3{
+        font-size:3vw;
+    }
+    .slide-dot{
+        bottom: 5vh;
+    }
+    .box-booking{
+        display: none;
+    }
+
+    /*our-mission*/
+    .our-mission h2,.our-mission p{
+        width:80vw;
+        
+    }
+    .main-img{
+        height:60vh;
+    }
+    /*end our-mission*/
+
+    /*cabin-carousel*/
+    .cabin-carousel{
+        width:100%;
+        margin:auto;
+    }
+    .cabin-slide{
+        width:80%;
+    }
+    .arrow-control {
+        width:10%;
+    }
+    .cabin-slide-img{
+        width:100%;
+
+        
+    }
+    .cabin-slide-img img{
+        width:80vw;
+        height: auto;
+        text-align: center;
+    }
+    .cabin-slide-content{
+        width:100%;
+        padding:10px 0;
+        height: auto;
+    }
+    .cabin-slide-content h4{
+       padding-bottom: 5px;
+        font-size:22px;
+    }
+    .cabin-slide-content p{
+        font-size:16px;
+    }
+    .cabin-slide-content button{
+        position: relative;
+    }
+    /*end cabin carousel*/
+
+    /*gallery*/
+    .gallery-container {
+        width:90%;
+    }
+    .gallery-row-2 div {
+        width:100%;
+    }
+    .gallery-row-4 div{
+        width:100%;
+        height: auto;
+        height:350px;
+    }
+
+    .gallery-book-now{
+        display: none;
+    }
+    .gallery-slide-item{
+        width:100%;
+        height:60vh;
+    }
+    .gallery-slide-img{
+        height:80vh;
+    }
+    .social {
+        margin-left:20%;
+    }
+    /*end gallery*/
+
+    /*quote*/
+    .quote-content h4 {
+        font-size:17px;
+        padding: 8vh 4vh 4vh;
+    }
+    .quote-content p {
+        padding:4vh;
+        font-size:18px;
+    }
+    /*end quote*/
+
+    /*out-post*/
+    .outpost-map{
+        width:95%;
+        height:60vh;
+    }
+    /*end out-post*/
+
+    /*page booking*/
+    .reservation-left{
+        width:100%;
+    }
+    .reservation-right{
+        width:100%;
+        position: relative;
+    }
+    .reservation-control{
+        padding: 4px 6px;
+    }
+    #ctrl-left{
+        left:-4px;
+    }
+    #ctrl-right{
+        right:-5px;
+    }
+
+    .reservation-title {
+        text-align: center;
+    }
+
+    .reservation-header{
+        text-align: center;
+    }
+    /*end page-booking*/
+}
+
+@media screen and (max-width: 600px){
+
+    .slide h1{
+        font-size:6vw;
+    }
+    .slide h3{
+        font-size:4vw;
+    }
+    .our-mission h2,.our-mission p{
+        width:96vw;
+      
+    }
+    .our-mission h2{
+        font-size:22px;
+    }
+    .our-mission p{
+        margin: 0;
+        font-size: 16px;
+    }
+    .main-img{
+        height:35vw;
+    }
+    .step{
+        width:100%;
+      
+    }
+    .title{
+        font-size:22px;
+        padding: 6vh 0 2vh;
+    }
+    .step-title {
+        padding: 5px 0;
+    }
+    .label-step{
+        padding-bottom: 10px;
+    }
+    .step-content :not(last-child){
+        margin-bottom: 8vh;
+    }
+
+    /*giving-back*/
+    .giving-back{
+        padding: 6vw 1vw;
+    }
+    .giving-back .giving-back-content{
+        width:90%;
+    }
+    .giving-back-content div{
+        width:100%;
+        font-size:16px;
+        margin-bottom: 4vh
+    }
+    .giving-back-content p{
+        width:100%;
+        font-size:17px;
+        letter-spacing: 1.1;
+        line-height: 1.8;
+        color: #39423e;
+    }
+    /*end giving-back*/
+
+    /*gallery*/
+    .social {
+        margin-left:0%;
+    }
+    .gallery-slide-content div span{
+        padding:0;
+    }
+    .gallery-slide-content div{
+        padding:10px 0
+    }
+    .gallery-wrap{
+        width:100%;
+    }
+    .gallery-slide {
+        width:84%;
+    }
+    .arrow-control-gallery{
+        width:7%;
+    }
+    .gallery-content h2 {
+        font-size:22px;
+    }
+    .gallery-content{
+        margin-bottom: 4vh;
+    }
+    .gallery-container{
+        padding-bottom:20px;
+    }
+    /* end gallery*/
+
+    /*quote*/
+    .quote-container{
+        width:95%;
+    }
+    .quote-content h4 {
+        font-size:16px;
+        padding: 4vh 2vh 2vh;
+    }
+    .quote-content p {
+        padding:2vh;
+        font-size:16px;
+    }
+    .quote-btn button{
+        padding: 15px 10px;
+        font-size:15px;
+    }
+    /*end quote*/
+
+    /*out-post*/
+    .outpost-map{
+        width:95%;
+        height:40vh;
+    }
+    /*end out-post*/
+
+    /*norminate*/
+    .nominate-content .nominate-input {
+        width:100%;
+        margin:5px 0;
+    }
+    /*end norminate*/
+
+    /*reservation*/
+    .guest-feedback h1{
+        text-align: center;
+    }
+    /*end reservation*/
+}
+
+
+
+/**/
+@media screen and (max-width:990px){
+    .responsive-sidebar{
+        display: none;
+    }
+    .input-category{
+        display: block !important;
+    }
+}

@@ -1,0 +1,158 @@
+  <!-- Begin Page Content -->
+  <div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800" align="center">Danh sách đơn đặt hàng chưa xử lý</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary" align="center"></h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Mã đơn hàng</th>
+                <th>Thành Tiền (đã giảm giá nếu có)</th>
+                <th>Tên khách hàng</th>
+                <th>Email</th>
+                <th>Tên sản phẩm</th>
+                <th>Số sản phẩm</th>
+                <th>Điểm đến</th>
+                <th>Ghi chú</th>
+                <th>Xử lý đơn</th>
+              </tr>
+            </thead>
+            <tbody id="pending">
+             
+             
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h1 class="h3 mb-2 text-gray-800" align="center">Danh sách đơn đặt hàng đã xử lý</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary" align="center"></h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Mã đơn hàng</th>
+                <th>Thành Tiền (đã giảm giá nếu có)</th>
+                <th>Tên khách hàng</th>
+                <th>Email</th>
+                <th>Tên sản phẩm</th>
+                <th>Số sản phẩm</th>
+                <th>Điểm đến</th>
+                <th>Ghi chú</th>
+              </tr>
+            </thead>
+            <tbody id="processed">
+             
+             
+            
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+<script>
+    function updateStatusOrder(element){
+   
+      
+      $.ajax({
+              url: '/admin/dat-hang/cap-nhat-trang-thai-don-hang/'+element.getAttribute("idOrder"),
+              method: 'GET',
+              dataType:'json',
+              success:  (res) => {
+                element.parentNode.parentNode.remove();
+                document.location.reload();
+              },
+              error:(err)=>{
+                console.log(err);
+              }
+          });
+          
+      
+     }
+
+     (function(){
+      var pending=``;
+      $.ajax({
+          url: '/admin/dat-hang/danh-sach-don-hang-chua-xu-ly',
+          method: 'GET',
+          dataType:'json',
+          success:  (res) => {
+            console.log(res);
+            var html=``;
+            for(let i=0 ;i<res.pending.length;i++){
+              html+=`  <tr>
+                    <td style="vertical-align: middle;">${res.pending[i].orderCode}</td>
+                    <td style="vertical-align: middle;">${res.pending[i].totalPrice}</td>
+                    <td style="vertical-align: middle;">${res.pending[i].idUser.name}</td>
+                    <td style="vertical-align: middle;">${res.pending[i].idUser.email}</td>
+                    <td style="vertical-align: middle;">${res.pending[i].idProduct.name}</td>   
+                    <td style="vertical-align: middle;">${res.pending[i].numberItem}</td>
+                    <td style="vertical-align: middle;">${res.pending[i].destination}</td>
+                    <td style="vertical-align: middle;">${res.pending[i].note}</td>
+                 
+                    <td style="vertical-align: middle;"><button class="btn btn-primary" idOrder="${res.pending[i]._id}" onclick="updateStatusOrder(this)">Xử lý đơn</button></td>
+                </tr>`;
+            }
+
+            $("#pending").append(html);
+            
+          },
+          error:(err)=>{
+            console.log(err);
+          }
+      });
+     }())
+
+
+     $(document).ready(function(){
+      var html=``;
+      $.ajax({
+          url: '/admin/dat-hang/danh-sach-don-hang-da-xu-ly',
+          method: 'GET',
+          dataType:'json',
+          success:  (res) => {
+            console.log(res);
+            for(let i=0 ;i<res.processed.length;i++){
+              html+=`  <tr>
+                    <td style="vertical-align: middle;">${res.processed[i].orderCode}</td>
+                    <td style="vertical-align: middle;">${res.processed[i].totalPrice}</td>
+                    <td style="vertical-align: middle;">${res.processed[i].idUser.name}</td>
+                    <td style="vertical-align: middle;">${res.processed[i].idUser.email}</td>
+                    <td style="vertical-align: middle;">${res.processed[i].idProduct.name}</td>   
+                    <td style="vertical-align: middle;">${res.processed[i].numberItem}</td>
+                    <td style="vertical-align: middle;">${res.processed[i].destination}</td>
+                    <td style="vertical-align: middle;">${res.processed[i].note}</td>
+                </tr>`;
+            }
+
+            $("#processed").append(html);
+            
+          },
+          error:(err)=>{
+            console.log(err);
+          }
+      });
+     })
+    
+    
+     
+</script>

@@ -1,0 +1,82 @@
+  <!-- Begin Page Content -->
+  <div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800" align="center">Danh sách sản phẩm</h1>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary" align="center"><%= data.category.name %></h6>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>Tên sản phẩm</th>
+                <th>Hình ảnh</th>
+                <th>Giá</th>
+                <th>Giảm giá</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="<%= data.category.type %>">
+               <% data.products.forEach(item=>{%>
+               <tr>
+                  <td style="vertical-align: middle;"><%=item.name %></td>
+                  <td style="vertical-align: middle;"><img width="100px" height="100px" src="/product-image/<%=item.image[0] %>" alt=""></td>
+                  <td style="vertical-align: middle;"><%= item.price %></td>
+                  <td style="vertical-align: middle;"><%=item.discount %></td>
+                  <td style="vertical-align: middle;"><button class="btn btn-primary" onclick="deleteProduct('<%= item.id%>','<%= data.category.type %>',this)">Xóa</button></td>
+                  <td style="vertical-align: middle;"><a href="/admin/san-pham/cap-nhat-san-pham/<%=item._id%>" class="btn btn-primary">Chi tiết</a></td>
+                </tr>
+              <%})%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+<script>
+    function deleteProduct(id,type,element){
+      $.ajax({
+              url: '/admin/san-pham/xoa-san-pham/'+id,
+              method: 'DELETE',
+              dataType:'json',
+              success:  (res) => {
+                console.log(type);
+                // render(res.products,type);
+                element.parentNode.parentNode.remove();
+              },
+              error:(err)=>{
+                console.log(err);
+              }
+              
+          });
+      
+     }
+     function render(data,type)
+     {
+       let listProduct="";
+        data.forEach(item => {
+        listProduct += 
+                      `<tr>
+                        <td style="vertical-align: middle;">${item.name}</td>
+                        <td style="vertical-align: middle;"><img width="100" height="100" src="/product-image/${item.image}"</td>
+                        <td style="vertical-align: middle;">${item.price}</td>
+                        <td style="vertical-align: middle;">${item.discount}</td>
+                        <td style="vertical-align: middle;"><button class="btn btn-primary btn-block" onClick="deleteProduct('${item._id}')">Xóa</button></td>
+                        <td style="vertical-align: middle;"><button class="btn btn-primary btn-block">Chi tiết</button></td>
+                     </tr>`
+        });
+       $(`#${type}`).html(
+         listProduct
+       );
+     }
+     
+</script>

@@ -1,0 +1,21 @@
+.intro_page_wrap .title_intro_page h4 {
+    font-weight: bold;
+}
+
+.max-width-img {
+    max-width: 100%;
+    height: 288px;
+    object-fit: cover;
+}
+
+.intro_page_wrap .testimonial {
+    color: #111;
+
+}
+.max-img{
+max-width:100%;
+}
+.icon_team_member a {
+    margin: 0.4em;
+    color: #111;
+}

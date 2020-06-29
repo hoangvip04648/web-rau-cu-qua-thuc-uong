@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets_user/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="/assets_user/css/profile.css">
+</head>
+
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3" style="border-right:solid 1px #ececec;">
+                <!--left col-->
+                <button class="btn btn-success" onclick="window.location.href='/'" style="margin:1em; margin-bottom:2em"><i class="fa fa-arrow-left" aria-hidden="true"></i> Tiếp tục mua hàng</button>
+                <div class="row" style="text-align: center;">
+                    <div class="col-lg-6">
+                        <div class="name-user-profile">
+                            <h5 style="height: 1.5em; line-height: 1.5em; font-weight: bold;" id="nameUser"></h5>
+                        </div>
+                    </div>
+
+                </div>
+                <hr>
+                <div class="info-profile-basic">
+                    <p><i class="fa fa-phone" aria-hidden="true" id="phoneUser"></i> </p>
+                    <p><i class="fa fa-envelope" aria-hidden="true" id="gmailUser"></i></p>
+                    <p><i class="fa fa-location-arrow" aria-hidden="true" id="addressUser"></i> </p>
+                   
+                </div>
+            </div>
+            <!--/col-3-->
+            <div class="col-lg-9">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home"><i class="fas fa-edit    "></i> Chỉnh Sửa Hồ
+                            Sơ</a></li>
+                    <li class=""><a data-toggle="tab" href="#history-purcharse"><i class="fas fa-history    "></i> Lịch
+                            Sử Mua Hàng</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active " id="home">
+
+                        <div class="col-xs-12">
+                            <div class="text-center">
+                                <img style="width:150px;height:150px" src="http://ssl.gstatic.com/accounts/ui/avatar_1x.png"
+                                    class="avatar img-circle img-thumbnail mt-3" alt="avatar" id="avatarUser">
+                                <h6>Sử dụng avatar khác...</h6>
+                                <div class="row">
+                                    <div class="col-lg-4"></div>
+                                    <div class="  col-lg-4 mb-5">
+                                        <input type="file" id="customFile">
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <button class="btn" style="background-color:#90bb09 ;" onclick="changeAvatar()" >Cập nhật avatar</button>
+                                    </div>
+                                    <div class="col-lg-2"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <form class="form" action="##" id="form" method="PUT">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label >
+                                        <h4>Tên</h4>
+                                    </label>
+                                    <input type="text" class="form-control" placeholder=""
+                                        title="enter your name if any." id="changeName">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label >
+                                        <h4>Số Điện Thoại</h4>
+                                    </label>
+                                    <input type="text" class="form-control" placeholder=""
+                                        title="enter your phone number if any." id="changePhone">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label >
+                                        <h4>Ngày sinh</h4>
+                                    </label>
+                                    <input class="form-control" placeholder=""
+                                        id="changeDate">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label>
+                                        <h4>Giới tính</h4>
+                                    </label>
+                                    <input class="form-control"  id="changeGender">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label >
+                                        <h4>Địa Chỉ</h4>
+                                    </label>
+                                    <input class="form-control"  placeholder="" title="enter a location" id="changeAddress">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn mr-2" style="background-color:#90bb09" onclick="submitData()"> Xác Nhận</button>
+                                    <button class="btn btn-default" type="reset">Đặt Lại</button>
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+                    </div>
+                    <div class="tab-pane " id="history-purcharse">
+                        <hr>
+                        <div class="table-users">
+                            <div class="header">Đơn Hàng Của Tôi</div>
+
+                            <table cellspacing="0" id="table">
+                                <tr>
+                                    <th class="text-center">Ảnh</th>
+                                    <th class="text-center">Tên Sản Phẩm</th>
+                                    <th class="text-center">Ngày Mua Hàng</th>
+                                    <th class="text-center">Số Lượng</th>
+                                    <th class="text-center">Thành Tiền</th>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--/tab-pane-->
+            </div>
+            <!--/tab-content-->
+
+        </div>
+        <!--/col-9-->
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+
+   
+
+    function parseNumber(num)
+    {
+    let arr = [];
+    while(num >= 1000){
+
+    arr.unshift(num%1000 == 0 ? '000': num%1000 < 100? '0'+num%1000 : num%1000);
+    num= parseInt(num/1000);
+    }
+    arr.unshift(num%1000);
+    return arr.join(',');
+    }
+
+    $('document').ready(function(){
+
+    $('#avatarUser').attr('src',JSON.parse(localStorage.getItem('user')).avatar);
+    $('#nameUser').text(JSON.parse(localStorage.getItem('user')).name);
+    $("#phoneUser").text(JSON.parse(localStorage.getItem('user')).phoneNumber);
+    $("#gmailUser").text(JSON.parse(localStorage.getItem('user')).email);
+    $("#addressUser").text(JSON.parse(localStorage.getItem('user')).address);
+    $("#addressUser").text(JSON.parse(localStorage.getItem('user')).address);
+    //thay doi
+    $('#changeName').val(JSON.parse(localStorage.getItem('user')).name);
+    $("#changePhone").val(JSON.parse(localStorage.getItem('user')).phoneNumber);
+    $("#changeAddress").val(JSON.parse(localStorage.getItem('user')).address);
+    $("#changeDate").val(JSON.parse(localStorage.getItem('user')).date);
+    $("#changeGender").val(JSON.parse(localStorage.getItem('user')).gender);
+    //không cần ajax
+
+    function parseDate(str)
+    {
+    const date = new Date(str.substr(1,10));
+    return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}` 
+    }
+    $.ajax({
+        url:"/dat-hang/danh-sach-mua-hang/"+JSON.parse(localStorage.getItem('user'))._id,
+        method:"GET",
+        success:res=>{
+            var html = "";
+            if(res.data != null)
+            {
+                res.data.forEach(item => {
+                html+=`
+                    <tr>
+                    <td><img src="/product-image/${item.idProduct.image[0]}"
+                            alt="" /></td>
+                    <td>${item.idProduct.name}</td>
+                    <td>${parseDate(item.date) }</td>
+                    <td>${item.numberItem}</td>
+                    <td class="text-center">${parseNumber(+item.totalPrice)} <u>đ</u> </td>
+                    </tr>
+                    `;
+            });
+            
+            $("#table").append(html);
+            }
+            
+        }
+    })
+
+
+
+    })
+
+
+    function submitData(){
+    const data = {
+
+        name:  $('#changeName').val(),
+        date:$('#changeDate').val(),
+        gender:$('#changeGender').val(),
+        address: $("#changeAddress").val(),
+        phoneNumber:$("#changePhone").val(),
+        id:JSON.parse(localStorage.getItem('user'))._id,
+    }
+    $.ajax({
+        url:"/user/thay-doi-thong-tin/",
+        method:"PUT",
+        data:data,
+        success:(res)=>{    
+            {
+                localStorage.setItem("user",JSON.stringify(res.data));
+                alert("Cập nhật thông tin thành công")
+                window.location.reload();
+            }
+
+        },
+        error:(err)=>{}
+    })
+    }
+    function changeAvatar(){
+    console.log("ok")
+    var formData = new FormData();
+    let file = document.getElementById('customFile').files[0]
+    formData.append("file",file);
+    $.ajax({
+        url:"/user/upAvatar/"+JSON.parse(localStorage.getItem('user'))._id,
+        method:"PUT",
+        data : formData,
+        contentType:false,
+        processData: false,
+        success:res=>{
+            localStorage.setItem("user",JSON.stringify(res));
+            $('#avatarUser').attr('src',JSON.parse(localStorage.getItem("user")).avatar)
+            $('#nameUser').text(JSON.parse(localStorage.getItem('user')).name);
+            $("#phoneUser").text(JSON.parse(localStorage.getItem('user')).phoneNumber);
+            $("#gmailUser").text(JSON.parse(localStorage.getItem('user')).email);
+            $("#addressUser").text(JSON.parse(localStorage.getItem('user')).address);
+            $("#addressUser").text(JSON.parse(localStorage.getItem('user')).address);
+            location.reload();
+        },
+        error:err=>{
+            console.log(err.status);
+        }
+
+    })
+
+    }
+</script>
+        
+</body>
+
+</html>
+
+

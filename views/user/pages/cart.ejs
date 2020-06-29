@@ -1,0 +1,226 @@
+
+
+
+    <div class="container">
+        <div class="row" style="overflow: hidden;width:100%">
+            <div class="col-lg-7 col-md-12 col-sm-12">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr style="font-size: 14px; font-weight: 500;">
+                                <th colspan="3" class="name-col-cart">SẢN PHẨM</th>
+                                <th class="price-col-cart">GIÁ</th>
+                                <th class="price-col-cart">DISCOUNT</th>
+                                <th class="quantity-col-cart">SỐ LƯỢNG</th>
+                                <TH class="total-cost-col-cart">TỔNG</TH>
+                            </tr>
+                        </thead>
+                        <tbody id = "list-item">
+                           
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12" style="border-left: 1px solid #ececec;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="3" >Tổng Số Lượng: <span id="total-number"></span></th>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:right">
+                        <tr>
+                            <td>Tổng Thu</td>
+                            <td><span class="amount total-price" > <u>đ</u></span></td>
+
+                        </tr>
+                        <tr>
+
+                            <td>Giao Hàng</td>
+                            <td>
+                                <textarea class="form-control" name="" id="destination" cols="35" rows="3"></textarea>
+                                <!-- <span style="font-size: 0.9em;">Giao hàng miễn phí
+                                    <br> Đây chỉ là ước tính. Giá sẽ cập nhật trong quá trình thanh toán.</span> <br>
+                                <span class="calc-shipping-fee" style="font-size: 0.9em;" id="show-form-shipping">Tính
+                                    phí giao hàng</span>
+                                <div class="form-shipping">
+                                    <select class="form-control mb-2" id="exampleFormControlSelect1">
+                                        <option>Việt Nam</option>
+                                        <option>Lào</option>
+                                        <option>Campuchia</option>
+                                        <option>Thái Lan</option>
+                                        <option>Bruney</option>
+                                    </select>
+                                    <input class="form-control" type="text" name="" id="" placeholder="Thành phố">
+                                    <input class="form-control" type="text" name="" id="" placeholder="Mã bưu điện">
+                                    <button class="btn btn-success" type="submit"
+                                        style="text-transform: uppercase;min-width: 100%; margin-right: 0;display: block; background-color:#86ba09">Cập
+                                        nhật</button>
+                                </div> -->
+                            </td>
+
+                        </tr>
+                        <tr>
+
+                            <td>Thông tin thêm khi nhận hàng</td>
+                            <td>
+                                <textarea class="form-control" name="" id="note" cols="35" rows="3"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tổng</td>
+                            <td><span class="amount total-price"> <u>đ</u></span></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button onclick="handleOrder()" type="submit" class="btn btn-danger btn-block">TIẾN HÀNH ĐẶT HÀNG</button></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p class="mb-0"> <i class="fa fa-ticket-alt" aria-hidden="true"></i> Phiếu ưu đãi</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input class="form-control" type="text" name="" id="" placeholder="Mã ưu đãi">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><button type="submit" class="btn btn-light btn-block"
+                                    style="border-color: #e7e7e7;">ÁP DỤNG</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+    <script>
+        const cart = JSON.parse(localStorage.getItem('cart'));
+        if(user !=null)
+        {
+            $('#destination').text(user.address);
+        }
+       
+        function renderListItem(listItem){
+            $('#list-item').html(listItem.map(item => {
+                return ` <tr id="${item.date}">
+                            <td class="remove-product-cart">
+                                <a href="" onclick="deleteCart('${item.date}')">x</a>
+                            </td>
+                            <td class="thumbnail-product-cart">
+                                <img src="/product-image/${item.image[0]}"
+                                    width="50px" height="50px" alt="">
+                            </td>
+                            <td class="name-product-cart">
+                                <p>${item.name}</p>
+                                <div class="price-mobile-show" style="display:none">
+                                        <SPAN class="amount">${parseNumber(item.price)} <u>đ</u></SPAN>
+                                </div>
+                            </td>
+                            <td class="price-product-cart">
+                                <SPAN class="amount">${parseNumber(item.price)} <u>đ</u></SPAN>
+                            </td>
+                            <td class="price-product-cart">
+                                <SPAN class="amount">${item.discount} <u>%</u></SPAN>
+                            </td>
+                            <td class="quantity-product-cart">
+                                <div class="cart-left-btn">
+                                   
+
+                                    <label id="result"
+                                        style=" width: 36px;padding: 0.25em 0.2em;text-align:center;color:#86ba09">${item.numberItem}</label>
+                                  
+                                </div>
+                            </td>
+                            <td class="total-cost-cart">
+                                <SPAN class="amount">${parseNumber(countPrice(item.price,item.numberItem,item.discount))} <u>đ</u></SPAN>
+                            </td>
+                        </tr>`
+            }))
+        }
+    function countPrice(price,number,discount)
+    {
+        return  Math.round((price*number*(100-discount))/100);
+    }
+    function countTotalPrice(cart)
+    {
+        let sum = 0;
+        cart.forEach(item => {
+            sum += countPrice(item.price,item.numberItem,item.discount);
+        })
+        return sum;
+    }
+    function renderOrder(cart){
+        const totalPrice = Math.round(countTotalPrice(cart)) ;
+        let totalNumber = 0;
+        console.log(totalPrice);
+        cart.forEach(item => {
+            totalNumber += parseInt(item.numberItem);
+        })
+        $('.total-price').text(`${parseNumber(totalPrice)}đ`);
+        $('#total-number').text(totalNumber);
+    }
+    renderOrder(cart);
+    renderListItem(cart);
+
+    function handleOrder(){
+       
+        if(user == null)
+        {
+            alert('Bạn cần đăng nhập để thực hiện chức năng này');
+            return;
+        }
+        if(cart == null || cart.length == 0)
+        {
+            alert('Bạn cần thêm sản phẩm vào giỏ trước khi đặt hàng')
+            return;
+        }
+        const totalPrice = Math.round(countTotalPrice(cart)) ;
+        let cartLocal =JSON.parse(localStorage.getItem('cart')) ;
+        cartLocal.forEach(item => {
+            item.totalPrice = countPrice(item.price,item.numberItem,item.discount);
+            item.idProduct = item._id
+        })
+
+        
+        $.ajax({
+            url:'/dat-hang',
+            method:'post',
+            dataType: "json",
+            data:{
+                idUser:user._id,
+                totalPrice:totalPrice,
+                note:$('#note').val(),
+                destination:$('#destination').val(),
+                products:cartLocal
+            },
+            success: res => {
+                if(res.success)
+                {
+                    localStorage.removeItem('cart');
+                updateNumberItem();
+                renderListItem([]);
+                $('#note').val('');
+                $('#destination').val('');
+                alert('Chúc mừng bạn đã đặt hàng thành công, bạn hãy kiểm tra email trước khi nhận hàng')
+                }
+               
+            },
+            error : err => {
+                console.log(err);
+            }
+        })
+
+    }
+    function deleteCart(date){
+        document.getElementById(`${date}`).remove();
+        let data = JSON.parse(localStorage.getItem('cart'));
+        for(let i = 0; i < data.length ; i++){
+            if(data[i].date==date){
+                data.splice(i,1);
+            }
+        }
+        localStorage.setItem('cart',JSON.stringify(data));
+    }
+    </script>

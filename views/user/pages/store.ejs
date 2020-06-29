@@ -1,0 +1,297 @@
+<div class="container-fluid" >
+
+    <!-- -->
+    <div class="row pt-4 pb-3" style="clear:both">
+        <div class="col-md-6 col-sm-3 heading mb-3" style="padding:0">
+            <h2 class="ml-3" style="    color: #8cbe41;
+            font-size: 2em;text-decoration: underline;
+            /* line-height: 1.6em; */
+            font-weight: bold;">Cửa Hàng</h2>
+            <!-- <strong style="padding-left:15px; font-size:25px">Cửa hàng</strong> -->
+        </div>
+        <div class="col-md-6" >
+            <div class="row" style="justify-content: flex-end;">
+                <div class="col-md-3 col-sm-4 mb-3" style="padding:0 14px ">
+                        <select class="form-control input-category" onchange="loadProductByCategoryMobile()">
+                            <% categorys.forEach((item,index)=>{%>
+                                <option value="<%= item._id %>" ><%= item.name %></option>
+                            <%})%>
+                            
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-sm-4 " style="padding-right: 14px;" >
+                        <select id="inputState" class="form-control" onchange="sortProduct()" style="color:#8cb341">
+                            <option selected data-sortby="price" value="1">Sắp xếp theo...</option>
+                            <option data-sortby="price" value="1">Giá tăng dần</option>
+                            <option data-sortby="price" value="-1">Giá giảm dần</option>
+                            <option data-sortby="name" value="-1">Tên sản phẩm (abc... )</option>
+                            <option data-sortby="name" value="1">Tên sản phẩm (zxy... )</option>
+                        </select>
+                    </div>
+            </div>
+          
+        </div>
+        
+    </div>
+
+    <!--sidebar-->
+    <div class="row">
+        <div class="col-3 responsive-sidebar ">
+
+             <!-- danh muc san pham-->
+
+             <div class="left-product-list mb-3">
+                <div class="title">
+                    <span class="h5">Danh mục sản phẩm</span>
+                </div>
+                <ul>
+                    <% categorys.forEach((item,index)=>{%>
+                        <li data-id="<%= item._id %>" class="category-item" onclick="handleActiveCategory('<%=index%>')" id="item<%=index %>" >
+                            <a href="javascript:void(0)" onclick="loadProductByCategory('<%= item._id %>','<%= index %>')">
+                                <%= item.name %>
+                            </a>
+                        </li>
+                    <%}) %>
+                </ul>
+            </div>
+                <!-- end danh muc san pham-->
+
+                <!--san pham-->
+            <div class="left-product-list mb-3">
+                <div class="title">
+                    <span class="h5">Sản phẩm nổi bật</span>
+                </div>
+                <ul id="productSellMany">
+                    <li>
+                        <a href="">
+                            <div class="left">
+                                <img class="imgWidth"
+                                    src="http://mauweb.monamedia.net/cleverfood/wp-content/uploads/2019/05/product-9-470x470-300x300.jpg"
+                                    alt="">
+                            </div>
+                            <div class="right">
+                                <span>Nho Xanh</span>
+                                <p>320,000 <u>đ</u></p>
+                            </div>
+                        </a>
+                    </li>
+        
+                </ul>
+            </div>
+        </div>
+        <!-- end sidebar-->
+
+        <!--product-item-->
+        <div class="col-lg-9">
+            <div class="row mb-3" id="list-product">
+                <% data.forEach((item,index) => {%>
+                    <div class=" col-md-3 col-sm-6 mb-3">
+                        <div class="item-product-card">
+                            <div class="pic">
+                                <a href="/page/san-pham/<%= item._id %>">
+                                    <img class="img-width"
+                                    src="/product-image/<%= item.image[0] %>"
+                                    alt="<%= item.description %>">
+                                </a>
+                            </div>
+                            <div class="text">
+                                <div class="content">
+                                    <a href="/page/san-pham/<%= item._id %>"><%= item.name %></a>
+                                </div>
+                                <p><%= item.price %> <u>đ</u> </p>
+                            </div>
+                        </div>
+                    </div>
+                <%}) %>
+            </div>
+            <!--phan trang-->
+            <nav aria-label="..." class="mb-3">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="javascript:void(0)" tabindex="-1" style="color:#86ba09;background:white" onclick="previousPage()">Previous</a>
+                  </li>
+                  <% for(let i=0;i<numPage;i++){%>
+                    <li data-num="<%= i+1 %>" onclick="handlePagination('<%= i+1 %>')" class="page-item <%= i+1==1?'active': null %>"><a  class="page-link <%= i+1==1?'active-page': null %>" href="javascript:void(0)"><%= i+1 %></a></li>
+                  <%} %>
+                  <li class="page-item">
+                    <a style="color:#86ba09;background: white;" class="page-link"href="javascript:void(0)" onclick="nextPage()">Next</a>
+                  </li>
+                </ul>
+              </nav>
+        </div>   
+        <!--end product item -->
+    </div>
+    
+    <script>
+        let currIndex=1;
+        let numPage = 2;
+        $(document).ready(function (){
+            $.ajax({
+                url:"/san-pham/san-pham-noi-bat/danh-sach?count=3",
+                method:"GET",
+                success:res=>{
+                    let html = '';
+                    res.forEach(item=>{
+                        html +=`
+                        <li>
+                        <a href="/page/san-pham/${item._id}">
+                            <div class="left">
+                                <img class="imgWidth"
+                                    src="/product-image/${item.image[0]}"
+                                    alt="">
+                            </div>
+                            <div class="right">
+                                <span>${item.name}</span>
+                                <p>${item.price}<u>đ</u></p>
+                            </div>
+                        </a>
+                    </li>
+                                `
+                    })
+                    $('#productSellMany').html(html);
+                }
+            })
+        })
+        function nextPage(){
+            if(currIndex<numPage)
+                 handlePagination(++currIndex)
+        }
+        function previousPage(){
+            if(currIndex>1)
+            handlePagination(--currIndex);
+        }
+        function handlePagination(index){
+            console.log(index);
+            currIndex = index;
+            let li=document.getElementsByClassName('page-item');
+            for(let i=0;i<li.length;i++)
+            {
+                li[i].classList.remove('active');
+            }
+            li[index].classList.add('active');
+
+            let pageLink = document.getElementsByClassName('page-link');
+            for(let i = 0 ; i<pageLink.length;i++)
+            {
+                pageLink[i].classList.remove('active-page');
+            }
+            pageLink[index].classList.add('active-page');
+            sortProduct();
+        }
+        function sortProduct(){
+            const currentPage=document.getElementsByClassName('active')[0].dataset.num;
+            const selectTag=document.getElementById('inputState');
+            const sort=selectTag.options[selectTag.selectedIndex].value;
+            const sortBy=selectTag.options[selectTag.selectedIndex].dataset.sortby;
+            const idCategory=document.getElementsByClassName('active-title').length > 0 ?document.getElementsByClassName('active-title')[0].dataset.id: '';
+            console.log(idCategory);
+            const query=`?idCategory=${idCategory}&sortBy=${sortBy}&sort=${sort}&page=${currentPage}`;
+            $.ajax({
+                url:'/san-pham'+query,
+                method:'get',
+                success:(res) => {
+                    render(res.products);
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
+        }
+        function loadProductByCategory(id,index){
+            const currentPage=document.getElementsByClassName('active')[0].dataset.num;
+            const selectTag=document.getElementById('inputState');
+            const sort=selectTag.options[selectTag.selectedIndex].value;
+            const sortBy=selectTag.options[selectTag.selectedIndex].dataset.sortby;
+            const query=`?idCategory=${id}&sortBy=${sortBy}&sort=${sort}`;
+            $.ajax({
+                url:'/san-pham'+query,
+                method:'get',
+                success:(res) => {
+                    render(res.products);
+                    renderPagination(res.numPage);
+                    numPage = res.numPage;
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
+    }
+
+    function loadProductByCategoryMobile(){
+            const id=$('.input-category').val();
+            const currentPage=document.getElementsByClassName('active')[0].dataset.num;
+            const selectTag=document.getElementById('inputState');
+            const sort=selectTag.options[selectTag.selectedIndex].value;
+            const sortBy=selectTag.options[selectTag.selectedIndex].dataset.sortby;
+            const query=`?idCategory=${id}&sortBy=${sortBy}&sort=${sort}`;
+            $.ajax({
+                url:'/san-pham'+query,
+                method:'get',
+                success:(res) => {
+                    render(res.products);
+                    renderPagination(res.numPage)
+                },
+                error: (err) => {
+                    console.log(err);
+                }
+            })
+    }
+
+
+
+    function renderPagination(numPage)
+    {
+        let numPageHtml="";
+        
+        for(let i=0;i<numPage;i++)
+        {
+            numPageHtml+=`<li  data-num="${i+1}" onclick="handlePagination('${i+1}')" class="page-item ${i+1==1 ? 'active': null }"><a  class="page-link  ${i+1==1?'active-page': null}" href="javascript:void(0)">${i+1}</a></li>`
+        }
+        const pagination=`
+                <li class="page-item disabled">
+                <a class="page-link" onclick="previousPage()" style="color:#86ba09" href="#" tabindex="-1">Previous</a>
+                 </li>
+                ${numPageHtml}
+                 <li class="page-item" >
+                  <a class="page-link" onclick="nextPage()" style="color: #86ba09" href="#">Next</a>
+               </li>`;
+        document.getElementsByClassName('pagination')[0].innerHTML=pagination;
+    }
+
+    function render(data,numPage){
+        let html="";
+        data.forEach(item =>{ 
+         html+=
+            `<div class=" col-md-3 col-sm-6 mb-3">
+                <div class="item-product-card">
+                    <div class="pic">
+                        <a href="/page/san-pham/${item._id}">
+                            <img class="img-width"
+                            src="/product-image/${item.image[0]}"
+                            alt="${item.description}">
+                        </a>
+                    </div>
+                    <div class="text">
+                        <div class="content">
+                            <a href="/page/san-pham/${item._id}">${item.name}</a>
+                        </div>
+                        <p>${item.price}<u>đ</u> </p>
+                    </div>
+                </div>
+            </div>`
+        });
+        $('#list-product').html(html);
+    }
+
+    function handleActiveCategory(index){
+        
+      let categoryItem =  document.getElementsByClassName('category-item');
+      for(let i=0;i<categoryItem.length;i++)
+      {
+         categoryItem[i].classList.remove('active-title');
+      }
+        categoryItem[index].classList.add('active-title');
+    }
+
+    </script>
+</div>

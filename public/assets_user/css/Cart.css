@@ -1,0 +1,96 @@
+.remove-product-cart,
+.thumbnail-product-cart,
+.name-product-cart {
+    padding: 10 0 !important;
+    width: 40px;
+}
+
+.remove-product-cart a {
+    text-decoration: none;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    font-size: 15px !important;
+    line-height: 19px !important;
+    border-radius: 100%;
+    color: #ccc;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid currentColor
+}
+
+.btn-amount {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    padding: 0.4em 0.7em;
+    cursor: pointer;
+    background-color: yellowgreen;
+}
+
+.btn-amount:hover {
+    background-color: rgb(131, 136, 131);
+}
+
+.calc-shipping-fee {
+    cursor: pointer;
+    transition: .4s;
+}
+
+span.amount {
+    white-space: nowrap;
+    color: #86ba09;
+    font-weight: bold;
+}
+
+.calc-shipping-fee:hover {
+    color: #86ba09;
+}
+
+.form-shipping input {
+    margin-bottom: 0.7em;
+}
+
+.form-shipping {
+    display: none;
+}
+
+@media (max-width: 555px) {
+
+    .price-col-cart,
+    .total-cost-col-cart,
+    .price-product-cart,
+    .total-cost-cart {
+        display: none;
+    }
+
+    td {
+        padding: 0 !important;
+    }
+
+    .thumbnail-product-cart {
+        width: unset;
+    }
+
+    .name-product-cart p {
+        font-size: 0.8em;
+        margin: 0;
+    }
+
+    .quantity-col-cart,
+    .quantity-product-cart {
+        text-align: right;
+    }
+
+    .price-mobile-show {
+        font-size: 0.8em;
+        display: block !important;
+    }
+
+    .button-table button {
+        margin-bottom: 10px;
+    }
+}

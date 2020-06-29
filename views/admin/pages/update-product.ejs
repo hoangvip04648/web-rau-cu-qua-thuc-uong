@@ -1,0 +1,174 @@
+  <!-- Begin Page Content -->
+  <div class="container-fluid">
+    <!-- Page Heading -->
+    <div class="text-center">
+      <h1 class="h4 text-gray-900 mb-4">Update Product</h1>
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+      <div class="card-body">
+        <form onsubmit="return validateForm()" name="productForm" action="/admin/san-pham/cap-nhat-san-pham" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="<%=product._id%>">
+            <div class="form-group">
+              <label for="exampleFirstName" class="font-weight-bold">Tên sản phẩm:</label>
+              <input type="text" name="name" value="<%=product.name%>" class="form-control form-control-user" id="exampleFirstName" placeholder="Tên sản phẩm">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFirstName" class="font-weight-bold">Loại Sản Phẩm:</label>
+              <select name="type" class="form-control form-control-user">
+                <option value="do-kho" <%if(product.type=="do-kho"){%>selected<%}%> >Đồ Khô</option>
+                <option value="thuc-uong" <%if(product.type=="thuc-uong"){%>selected<%}%>>Thức Uống</option>
+                <option value="trai-cay" <%if(product.type=="trai-cay"){%>selected<%}%>>Trái Cây</option>
+                <option value="rau-cu" <%if(product.type=="rau-cu"){%>selected<%}%>>Rau Củ</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFirstName" class="font-weight-bold">Ngày Sản Xuất:</label>
+              <input type="date" name="createDate" value="<%=product.createDate%>" class="form-control form-control-user" id="exampleFirstName">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFirstName" class="font-weight-bold">Nơi sản Xuất:</label>
+              <input type="text" name="place" value="<%=product.place%>" class="form-control form-control-user" id="exampleFirstName" placeholder="Nơi Sản Xuất">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFirstName" class="font-weight-bold">Hạn Sử Dụng:</label>
+              <input type="date" name="expiryDate" value="<%=product.expiryDate%>" class="form-control form-control-user" id="exampleFirstName">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 10px;">
+              <label for="exampleFirstName" class="font-weight-bold">Mô tả sản phẩm:</label>
+              <textarea name="description" class="form-control form-control-user" id="" cols="30" rows="8" placeholder="Description..."><%=product.description%></textarea>
+            </div>
+
+            <div class="form-group" style="margin-bottom: 10px;">
+              <label for="exampleFirstName" class="font-weight-bold">Danh mục sản phẩm:</label>
+              <select name="idCategory" class="form-control form-control-user" id="">
+                  <% categories.forEach(category=>{%>
+                    <option value="<%=category._id %>" <%if(product.idCategory==category._id){%>selected<%}%> ><%=category.name%></option>
+                  <%})%>
+              </select>
+            </div>
+            
+            <div class="form-group" style="padding-bottom: 0px;margin-bottom: 0px;">
+                <label for="exampleFirstName" class="font-weight-bold">Giá Sản Phẩm:</label>
+            </div>
+
+            <div class="form-group row" style="padding-top: 0px; margin-top: 0px;">
+              <div class="col-sm-6 mb-3 mb-sm-0">
+                  <input type="number" name="price" value="<%=product.price%>" class="form-control form-control-user" placeholder="Price">
+                </div>
+                <div class="col-sm-6">
+                  <input type="number" name="discount" value="<%=product.discount%>" class="form-control form-control-user" placeholder="Discount Price">
+                </div>
+            </div>
+
+            <div>
+              <% product.image.forEach(image=>{%>
+                  <div>
+                    <div class="form-group" style="text-align: center;">
+                        <div>
+                          <div>
+                              <h6 class="font-weight-bold" class="font-weight-bold">Hình Ảnh:</h6>
+                          </div>
+                          <img width="auto" height="400px" src="/product-image/<%=image%>" alt="">
+                        </div>
+                        <div style="padding-top: 8px;">
+                          <button class="btn btn-danger" id="asdasdasd" onclick="removeImage(this)" data-imagename="<%=image%>" data-idproduct="<%=product.id%>" type="button">Remove</button>
+                        </div>
+                    </div>
+                  </div>
+              <%})%>
+            </div>
+
+            <div>
+              <div class="form-group inputImage">
+                  <div>
+                      <h6 class="font-weight-bold" class="font-weight-bold">Hình Ảnh:</h6>
+                  </div>            
+                  <input style="margin-bottom: 5px" name="image" class="form-control imageFile inputFileBox" type="file">
+                  <button class="btn btn-primary"  onclick="duplicate(this)" type="button">Thêm</button>
+                  <button class="btn btn-primary"  onclick="remove(this)" type="button">Xóa</button>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" style="color: aliceblue;">
+              Cập Nhật
+            </button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+
+<script>
+
+  function removeImage(element){
+   
+    var imageName= element.getAttribute("data-imagename");
+    var idProduct= element.getAttribute("data-idproduct");
+
+    $.ajax({
+      url:"../../san-pham/xoa-hinh-anh-san-pham/"+idProduct+"/"+imageName,
+      type :"GET",
+      success : function(result) {
+        element.parentNode.parentNode.remove();
+      },
+      error: function( errorThrown ){
+          console.log(errorThrown);
+      }
+    });
+  }
+
+  function duplicate(id) {
+    var i = 0;
+    var original = id.parentNode;
+    var clone = original.cloneNode(true); 
+    original.parentNode.appendChild(clone);
+  }
+
+  function remove(id){
+    if(document.getElementsByClassName("inputImage").length>1){
+      var i = 0;
+      var original = id.parentNode;
+      original.remove();
+    }else{
+      alert("Cant Remove");
+    }
+  }
+
+  function validateForm(){
+    var productForm=document.forms['productForm'];
+    if(productForm['name'].value===""){
+      alert("Please Add Product Name");
+      return false;
+    }
+    if(productForm['description'].value===""){
+      alert("Please Add Description");
+      return false;
+    }
+    if(productForm['idCategory'].value===""){
+      alert("Please Choose Category");
+      return false;
+    }
+    if(productForm['price'].value===""){
+      alert("Please Add Price");
+      return false;
+    }
+    if(productForm['discount'].value===""){
+      alert("Please Add Discount");
+      return false;
+    }
+    if(productForm['discount'].value>=productForm['price'].value){
+      alert("Giảm Giá Vô Lý Quá!");
+      return false;
+    }
+    return true;
+  }
+</script>

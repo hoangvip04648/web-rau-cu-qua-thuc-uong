@@ -1,0 +1,438 @@
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Báo Cáo</h1>
+      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Report</a>
+    </div>
+
+    <!-- Content Row -->
+    <div class="row">
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Đơn hàng hôm nay</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800"><%= data[0] %></div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+          <div class="card-body">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Doanh thu hôm nay</div>
+                <div class="h5 mb-0 font-weight-bold text-gray-800"><%= data[1] %>đ</div>
+              </div>
+              <div class="col-auto">
+                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Doanh thu tháng này</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800"><%= data[2] %>đ</div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+         <!-- Earnings (Monthly) Card Example -->
+         <div class="col-xl-3 col-md-6 mb-4">
+          <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+              <div class="row no-gutters align-items-center">
+                <div class="col mr-2">
+                  <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Doanh thu năm nay</div>
+                  <div class="h5 mb-0 font-weight-bold text-gray-800"><%= data[3] %>đ </div>
+                </div>
+                <div class="col-auto">
+                  <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      
+    </div>
+
+    <!-- Content Row -->
+
+    <!--don hang theo thang-->
+    <div class="row">
+  
+
+   
+      <!-- Area Chart -->
+      <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Thống kê đơn hàng theo tháng</h6>
+            <div class="dropdown no-arrow">
+              <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="chart-area">
+              <canvas id="lineChartByMonth"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+
+      
+      <!-- Pie Chart -->
+      <div class="col-xl-4 col-lg-5">
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Doanh thu theo loại sản phẩm từng tháng</h6>
+            <div class="dropdown no-arrow">
+                <div class="col-auto my-1">
+                  <select style="width:90px" class="custom-select mr-sm-2" id="revenueMonth" onchange="getRevenueByMonth(value)">
+                    <% [1,2,3,4,5,6,7,8,9,10,11,12].forEach(item=>{%>
+                      <option  value="<%= item %>"><%= item %></option>
+                      <%}) %>
+                  </select>
+               
+              </div>
+            </div>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="chart-pie pt-4 pb-2">
+              <canvas id="revenueByMonth"></canvas>
+            </div>
+            <div class="mt-4 text-center small">
+              <span class="mr-2">
+                <i class="fas fa-circle text-primary"></i> Trái cây
+              </span>
+              <span class="mr-2">
+                <i class="fas fa-circle text-success"></i> Rau củ
+              </span>
+              <span class="mr-2">
+                <i class="fas fa-circle text-info"></i> Đồ uống
+              </span>
+              <span class="mr-2">
+                <i class="fas fa-circle text-danger"></i> Đồ khô
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end don hang theo thang-->
+
+
+ <!--don hang theo nam-->
+    <div class="row">
+
+      <!-- Area Chart -->
+      <div class="col-xl-8 col-lg-7">
+        <div class="card shadow mb-4">
+          <!-- Card Header - Dropdown -->
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Thống kê đơn hàng theo năm</h6>
+            <div class="dropdown no-arrow">
+              <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                <div class="dropdown-header">Dropdown Header:</div>
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </div>
+          <!-- Card Body -->
+          <div class="card-body">
+            <div class="chart-area">
+              <canvas id="lineChartByYear"></canvas>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+
+      
+      <!-- Pie Chart -->
+      
+    </div>
+<!--end don hang theo nam-->
+
+
+
+    <!-- Content Row -->
+    <div class="row">
+
+      <!-- Content Column -->
+      <div class="col-lg-6 mb-4">
+
+       
+        
+
+      </div>
+
+      <div class="col-lg-6 mb-4">
+
+        
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <script>
+  //char by month data
+  (function(){
+    var ctxL = document.getElementById("lineChartByMonth").getContext('2d');
+    var date=new Date();
+    var dataViewNumber=[];
+    
+    var labels=Array();
+    for(let i=0;i<new Date(date.getFullYear(),date.getMonth()+1,0).getDate();i++)
+    {
+      labels.push(`Ngày ${i+1}`);
+    }
+    console.log(labels);
+    $.ajax({
+      url:'/admin/dat-hang/don-hang-theo-thang',
+      method:'get',
+      success:(res)=>{
+        console.log(res);
+          var myLineChart = new Chart(ctxL, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: "Số đơn hàng : ",
+                  data: res,
+                  backgroundColor: [
+                    'rgba(0, 137, 132, .2)',
+                  ],
+                  borderColor: [
+                    'rgba(0, 10, 130, .7)',
+                  ],
+                  borderWidth: 2
+                }
+              ]
+            },
+            options: {
+              responsive: true
+            }
+          });
+      },
+      error: (err) =>{
+        console.log(err);
+
+      }
+      
+    })
+    
+  }()) 
+
+
+  //char by year data
+  function charByYear(){
+    var ctxL = document.getElementById("lineChartByYear").getContext('2d');
+    var date=new Date();
+    var dataViewNumber=[];
+    
+    var labels=Array();
+    for(let i=0;i<12;i++)
+    {
+      labels.push(`Tháng ${i+1}`);
+    }
+    console.log(labels);
+    $.ajax({
+      url:'/admin/dat-hang/don-hang-theo-nam',
+      method:'get',
+      success:(res)=>{
+        console.log(res);
+          var myLineChart = new Chart(ctxL, {
+            type: 'line',
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: "Số đơn hàng: ",
+                  data: res,
+                  backgroundColor: [
+                    'rgba(0, 137, 132, .2)',
+                  ],
+                  borderColor: [
+                    'rgba(0, 10, 130, .7)',
+                  ],
+                  borderWidth: 2
+                }
+              ]
+            },
+            options: {
+              responsive: true
+            }
+          });
+      },
+      error: (err) =>{
+        console.log(err);
+
+      }
+      
+    })
+    
+  }
+  charByYear();
+/*-------------------*/   
+
+// Pie Chart by month
+function revenueByMonth(data){
+    var ctx = document.getElementById("revenueByMonth");
+var revenueByMonth = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ["Trái cây", "Rau củ", "Đồ uống","Đồ khô"],
+    datasets: [{
+      data: [data['trai-cay'], data['rau-cu'], data['thuc-uong'],data['do-kho']],
+      backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#c52919'],
+      hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf','rgb(136, 13, 13)'],
+      hoverBorderColor: "rgba(234, 236, 244, 1)",
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    tooltips: {
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+    },
+    legend: {
+      display: false
+    },
+    cutoutPercentage: 80,
+  },
+});
+  }
+
+
+    
+
+/*--------------------*/
+  
+// // Pie Chart by year
+//   function revenueByYear(){
+//     var ctx = document.getElementById("revenueByYear");
+// var revenueByYear = new Chart(ctx, {
+//   type: 'doughnut',
+//   data: {
+//     labels: ["Trái cây", "Rau củ", "Đồ uống","Đồ khô"],
+//     datasets: [{
+//       data: [55, 30, 10,5],
+//       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc',"#c52919"],
+//       hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf','rgb(136, 13, 13)'],
+//       hoverBorderColor: "rgba(234, 236, 244, 1)",
+//     }],
+//   },
+//   options: {
+//     maintainAspectRatio: false,
+//     tooltips: {
+//       backgroundColor: "rgb(255,255,255)",
+//       bodyFontColor: "#858796",
+//       borderColor: '#dddfeb',
+//       borderWidth: 1,
+//       xPadding: 15,
+//       yPadding: 15,
+//       displayColors: false,
+//       caretPadding: 10,
+//     },
+//     legend: {
+//       display: false
+//     },
+//     cutoutPercentage: 80,
+//   },
+// });
+//   }
+
+//   revenueByYear();
+    
+
+function getRevenueByMonth(month)
+{
+    $.ajax({
+      url:`/admin/dat-hang/doanh-thu-theo-loai-san-pham/${parseInt(month)}`,
+      method:'get',
+      success: res => {
+        console.log(res);
+        if(res['trai-cay']==0&&res['rau-cu']==0&&res['thuc-uong']==0&&res['do-kho']==0)
+        {
+          alert('chưa có dữ liệu trong tháng này');
+          document.getElementById('revenueMonth').value=new Date().getMonth()+1;
+          return;
+        }
+        else
+        {
+          revenueByMonth(res)
+
+        }
+       
+      },
+      error: err => {
+        console.log(err);
+      }
+    })
+}
+  
+(function(){
+    getRevenueByMonth(new Date().getMonth()+1);
+    document.getElementById('revenueMonth').value=new Date().getMonth()+1
+}())
+</script>
+<!-- Page level custom scripts -->

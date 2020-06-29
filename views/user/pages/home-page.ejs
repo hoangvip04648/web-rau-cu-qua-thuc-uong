@@ -1,0 +1,194 @@
+
+<div >
+   <!--carousel-->
+   <div class="container-fluid owl-carousel owl-theme">
+      <% data.slides.forEach(item => {%>
+         <div class="owl-slide d-flex align-items-center cover"
+        style="background-image: url('/upload/slides/<%= item.background %>');">
+        <div class="container">
+          <div class="row justify-content-center justify-content-md-start">
+            <div class="col-lg-7 col-md-6 static">
+              <div class="owl-slide-text">
+                  
+                <span style="color:white;font-size: 21px;font-weight: 400; background-color: rgb(134, 186, 9);padding:0.6em;text-shadow: none;"><%= item.logoText %></span>
+               <br> <span><%= item.title %></span>
+                <div class="owl-slide-animated owl-slide-subtitle mb-3">
+                  <%= item.subTitle %>
+                </div>
+                <a class="btn btn-primary owl-slide-animated owl-slide-cta" href="" target="">MUA NGAY</a>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6 img-animation m-5">
+              <img class="img-animation-first-load"
+                src="/upload/slides/<%= item.image %>" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+         <%}) %>
+      
+      <!--/owl-slide-->
+   
+      
+</div>
+
+<div class="container mt-3 ">
+    <h4>Danh mục</h4>
+  <div class="row mb-3" id="list-category">
+      <% data.category.forEach((item,index) => {%>
+          <div class=" col-md-6 col-sm-6 mb-3">
+              <div class="item-product-card set_background">
+                  <div class="pic">
+                      <a href="/page/cua-hang">
+                          <img class="img-width full_width_img"
+                          src="/upload/category/<%= item.image %>"
+                          alt="<%= item.description %>">
+                      </a>
+                  </div>
+                  <div class="text">
+                      <div class="content">
+                          <a href="/page/cua-hang"><%= item.name %></a>
+                      </div>
+                    
+                  </div>
+              </div>
+          </div>
+      <%}) %>
+  </div>
+</div>
+
+<div class="container mt-3 ">
+    <h4>Sản phẩm nổi bật</h4>
+  <div class="row mb-3" id="list-category">
+      <% data.products.forEach((item,index) => {%>
+          <div class=" col-md-3 col-sm-6 mb-3">
+              <div class="item-product-card">
+                  <div class="pic">
+                      <a href="/page/san-pham/<%= item._id %>">
+                          <img class="img-width"
+                          src="/product-image/<%= item.image[0] %>"
+                          alt="<%= item.description %>">
+                      </a>
+                  </div>
+                  <div class="text">
+                      <div class="content">
+                          <a href="/page/san-pham/<%= item._id %>"><%= item.name %></a>
+                          <p><%= item.price %> <u>đ</u></p>
+                      </div>
+                    
+                  </div>
+              </div>
+          </div>
+      <%}) %>
+  </div>
+</div>
+
+<div class="container mt-3 " id="viewedProducts"></div>
+<section class="subcribe-panel">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="single">
+                    <h2>Đăng ký để nhận cập nhật</h2>
+                    <div class="input-group">
+                        <input type="email"  id="email-subcribe" class="form-control" placeholder="Enter your email">
+                        <span class="input-group-btn">
+                            <button class="btn btn-theme" onclick="handleSubcribe()" type="submit">Subscribe</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+<script>
+    let dataviewed =JSON.parse(localStorage.getItem('viewedProducts'))
+    console.log(dataviewed)
+    let html = `   <h4>Sản phẩm đã xem</h4>
+  <div class="row mb-3" id="list-category">`;
+    if(dataviewed){
+        dataviewed.forEach(item => {
+            html+=`
+            <div class=" col-md-3 col-sm-6 mb-3">
+              <div class="item-product-card">
+                  <div class="pic">
+                      <a href="/page/san-pham/${ item._id }">
+                          <img class="img-width"
+                          src="${ item.image} %>"
+                          alt="${ item.description}">
+                      </a>
+                  </div>
+                  <div class="text">
+                      <div class="content">
+                          <a href="/page/san-pham/${item._id}">${ item.name}</a>
+                          <p>${item.price}<u>đ</u></p>
+                      </div>
+                    
+                  </div>
+              </div>
+          </div>
+            `
+          
+        })
+          html +=`</div>
+                    `
+            console.log(html)
+            $('#viewedProducts').html(html)
+    }
+</script>
+
+
+<script>
+
+function handleSubcribe()
+    {
+        const email = $('#email-subcribe').val();
+        if(ValidateEmail(email))
+        {
+            $.ajax({
+            url:'/thong-bao/dang-ky-nhan-tin',
+            method:'post',
+            data:{
+                email:$('#email-subcribe').val()
+            },
+            success: res => {
+                alert(res.message);
+            },
+            error: err => {
+                console.log(err);
+            }
+        })
+        }
+        else
+        {
+            alert("Địa chỉ email không hợp lệ")
+        }
+       
+    }
+    $('#email-subcribe').on('keyup',(e)=>{
+
+        if(e.keyCode==13)
+        {
+            handleSubcribe();
+        }
+    })
+ 
+  
+    function ValidateEmail(email)
+    {
+       if(email.includes('@gmail.com'))
+       {
+           return true;
+       } 
+       else
+       {
+           return false;
+       }
+    }
+   
+
+</script>
+
+<script src="/assets_user/OwlCarousel2-2.3.4/dist/owl.carousel.js"></script>
+<script src="/assets_user/js/slide-homepage.js"></script>   

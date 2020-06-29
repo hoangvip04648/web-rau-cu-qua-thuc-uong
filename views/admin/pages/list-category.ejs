@@ -1,0 +1,244 @@
+  <!-- Begin Page Content -->
+  <div class="container-fluid">
+      <!-- Page Heading -->
+      <h1 class="h3 mb-2 text-gray-800" align="center">Danh sách danh mục</h1>
+      <!-- DataTales Example -->
+      <div class="card shadow mb-4">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Tên danh mục</th>
+                  <th>Kiểu danh mục</th>
+                  <th style="width:20%;text-align: center;" >Ảnh cũ</th>
+                  <th>Hình ảnh</th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="listCategory">
+                  <% data.forEach(item=>{%>
+                    <tr>
+                       <td><%=item.name %></td>
+                       <td><%=item.type %></td>
+                       <td><img src="/upload/category/<%= item.image %>" style="width: 80%;"></td>
+                       <td  align="center"><button class="btn btn-primary" onclick="upImage('<%=item._id%>')">Upload</button></td>
+                       <td align="center"><button class="btn btn-primary" onclick="deleteCategory('<%=item._id%>')">Xóa</button></td>
+                       <td  align="center"><button class="btn btn-primary"  onclick="updateCategory('<%=item._id%>')">Chi tiết</button></td>
+                     </tr>
+                   <%})%>
+                   <tr>
+                     <td>
+                       <input style="width:100%" id='1'>
+                     </td>
+                     <td>
+                        <input style="width:100%" id='2'>
+                     </td>
+                     
+                     <td colspan="4" style="text-align: center;"><button class="btn btn-primary" onclick="addCategory()" >Thêm Danh Mục</button></td>
+                   </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+    <!-- /.container-fluid -->
+  
+  </div>
+  <!-- End of Main Content -->
+  <script>
+      function deleteCategory(id){
+        $.ajax({
+                url: '/admin/danh-muc/xoa-danh-muc/'+id,
+                method: 'DELETE',
+                dataType:'json',
+                headers : {
+                  'x-access-token' : localStorage.getItem('x-access-token')
+                },
+                success:  (res) => {
+                  console.log(res);
+                  render(res.data)
+                },
+                error : function(){
+                  console.log(err);
+                }
+            });
+        
+       }
+     
+      function render(data)
+       {
+         let listProduct='';
+          data.forEach(item => {
+          listProduct += 
+                        `<tr>
+                        <td>${item.name}</td>
+                        <td>${item.type}</td>
+                        <td><img src="/upload/category/${item.image }" style="width: 100%;"></td>
+                        <td  align="center"><button class="btn btn-primary" onclick="upImage('${item._id}')">Upload</button></td>
+                        <td align="center"><button class="btn btn-primary" onclick="deleteCategory('${item._id}')">Xóa</button></td>
+                       <td  align="center"><button class="btn btn-primary" onclick="updateCategory('${item._id}')">Chi tiết</button></td>
+                       </tr>`
+          });
+          listProduct +=
+                      `<tr>
+                     <td> <input style="width:100%" id='1'></td>
+                     <td> <input style="width:100%" id='2'></td>
+                     <td></td>
+                     <td colspan="4" style="text-align: center;"><button class="btn btn-primary" onclick="addCategory()" >Thêm Danh Mục</button></td>
+                       </tr>`;
+         $('#listCategory').html(
+           listProduct
+         );
+       }
+      
+      function addCategory(){
+         var valFirst=$('#1').val();
+         var valSecon=$('#2').val();
+         $('#dataTable').removeData();
+          var html ="";
+         $.ajax({
+          url : "/admin/danh-muc/them-danh-muc",
+          method : "POST",
+          headers : {
+            'x-access-token' : localStorage.getItem('x-access-token')
+          },
+          data : {
+            "name" : valFirst,
+            "type" : valSecon
+          },
+          success : function(res){
+            render(res.data)
+          },
+          error : function(){
+            console.log(err);
+          }
+         })
+       }
+  
+      function updateCategory(id){  
+        var data;
+        $.ajax({
+          url : "/admin/danh-muc/lay-danh-muc/"+id,
+          method : "GET",
+          dataType : "json",
+          headers : {
+            'x-access-token' : localStorage.getItem('x-access-token')
+          },
+          success : function(res){
+            var html = `
+               <thead>
+                <tr>
+                  <th>Tên danh mục</th>
+                  <th>Kiểu danh mục</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="listCategory">
+                <tr>
+                  <form id="myForm" name="myForm">
+                     <td>
+                       <input style="width:100%" id='1' name="name" value="${res.name}">
+                     </td>
+                     <td>
+                        <input style="width:100%" id='2' name = "type" value="${res.type}">
+                     </td>
+                     <td  style="text-align: center;"><button class="btn btn-primary" onclick="saveInfo('${id}')" >Lưu</button></td>
+                   </tr>
+                  </form>
+              </tbody>`;
+        
+  
+          $('#dataTable').html(html);
+          },
+          error : err=>{
+            console.log(err);
+          }
+        })
+       }
+  
+      function saveCategory(id){
+  
+         var html ='';
+         var formData = new FormData();
+         let file = document.getElementById('file').files[0];
+         formData.append('file',file);
+  
+        $.ajax({
+                url: '/admin/danh-muc/sua-thong-tin/'+id,
+                method: "PUT",
+                contentType: false,
+                processData: false,
+                headers : {
+                  'x-access-token' : localStorage.getItem('x-access-token')
+                },
+  
+                data : formData,
+                success:  (res) => {
+                  window.location.replace('/admin/danh-muc/danh-sach');
+                },
+                error : (err)=>{
+                  console.log(err);
+                }
+              })
+       }
+       function upImage(id){
+        var data;
+        $.ajax({
+          url : "/admin/danh-muc/lay-danh-muc/"+id,
+          method : "GET",
+          dataType : "json",
+          headers : {
+            'x-access-token' : localStorage.getItem('x-access-token')
+          },
+          success : function(res){
+            var html = `
+               <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Ảnh cũ</th>
+                  <th>
+                </tr>
+              </thead>
+              <tbody id="listCategory">
+                <tr>
+                     <td>
+                      <input type="file" id="file">
+                    </td>
+                    <td><img src="/upload/category/${res.image}" style="width:80%"></td>
+                     <td  style="text-align: center;"><button class="btn btn-primary" onclick="saveCategory('${id}')" >Lưu</button></td>
+                   </tr>
+              </tbody>`;
+        
+  
+          $('#dataTable').html(html);
+          },
+          error : err=>{
+            console.log(err);
+          }
+        })
+       }
+  
+       function saveInfo(id){
+          $.ajax({
+            url :"/admin/danh-muc/info/"+id,
+            method : "PUT",
+            headers : {
+            'x-access-token' : localStorage.getItem('x-access-token')
+           },
+           dataType:'json',
+            data : {
+              "name" : $('#1').val(),
+              "type" :  $('#2').val()
+            },
+            success : (res)=>{
+              window.location.replace('/admin/danh-muc/danh-sach');
+            }
+          })
+       }
+  
+  </script>
+  

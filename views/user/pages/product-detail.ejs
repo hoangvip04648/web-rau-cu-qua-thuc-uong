@@ -1,0 +1,583 @@
+<div class="container">
+    <div class="row" style="width:100%">
+        <div class="col-lg-6 col-md-12 col-xs-12">
+            <div id="carouselId" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <% data.product.image.forEach((item,index)=>{%>
+                    <li data-target="#carouselId" data-slide-to="<%= index %>" class="<% if(index==0){%>active<% } %>">
+                    </li>
+
+                    <%}) %>
+
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <% data.product.image.forEach((item,index)=>{%>
+                    <div class="box-image carousel-item <% if(index==0){%>active<% } %>">
+                        <img class="img-width-full-size" src="/product-image/<%= item %>"
+                            alt="<%= data.product.description %>">
+                    </div>
+                    <%}) %>
+
+
+                </div>
+                <a class="carousel-control-prev" href="#carouselId" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselId" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-xs-12 content-right-detail-product">
+            <div class="breadcrumbs-link-header mt-3">
+                <nav class="breadcrumb" style="background:none;">
+                    <a class="breadcrumb-item" href="#">Cửa hàng</a>
+
+                </nav>
+            </div>
+            <h2 ><%= data.product.name %></h2>
+              <div class="rating" style="pointer-events: none;">
+                  <% [1,2,3,4,5].forEach(item => {%>
+                    <input type="radio" name="rating-star2" class="rating__control" id="r<%=item%>" disabled <%= Math.round(data.product.rate)== item ? "checked" : '' %> >
+                    <%}) %>
+                <label for="r1" class="rating__item">
+                    <svg class="rating__star">
+                    <use xlink:href="#star"></use>
+                    </svg>
+                    <span class="rating__label">1</span>
+                </label>
+                <label for="r2" class="rating__item">
+                    <svg class="rating__star">
+                    <use xlink:href="#star"></use>
+                    </svg>
+                    <span class="rating__label">2</span>
+                </label>
+                <label for="r3" class="rating__item">
+                    <svg class="rating__star">
+                    <use xlink:href="#star"></use>
+                    </svg>
+                    <span class="rating__label">3</span>
+                </label>
+                <label for="r4" class="rating__item">
+                    <svg class="rating__star">
+                    <use xlink:href="#star"></use>
+                    </svg>
+                    <span class="rating__label">4</span>
+                </label>
+                <label for="r5" class="rating__item">
+                    <svg class="rating__star">
+                    <use xlink:href="#star"></use>
+                    </svg>
+                    <span class="rating__label">5</span>
+                </label>
+               
+            </div>  
+            <small class=""><%= data.numVote %> đánh giá cho sản phẩm này</small>
+            <div class="strike-below-name mb-3 "></div>
+            <span><%= data.product.price %> <u>đ</u> </span>
+            <p><%= data.product.description %></p>
+            
+            <div class="add-to-cart mt-5">
+                <div class="cart-left-btn">
+                    <button class="btn-amount" id="btn-decrease" style="display:inline-block">
+                        -
+                    </button>
+
+                    <input name="" id="result" value="1" style=" width: 36px;padding: 0.25em 0.2em;text-align:center;">
+                    <button class="btn-amount" id="btn-increase" style="display:inline-block">
+                        +
+                    </button>
+                </div>
+               
+                <div class="cart-right-btn ml-3" style="position: relative;">
+                      <div class="alert alert-success" style="position: absolute;bottom:20px;width:240px;display: none;" role="alert">
+                        Thêm vào giỏ thành công
+                    </div>
+                    <a href="javascript:void(0)" onclick="addToCart(`<%=JSON.stringify(data.product) %>`)">Thêm vào giỏ</a>
+                   
+                </div>
+            </div>
+            <strong class="mt-4" style="display:block;">
+                Sản phẩm của chúng tôi vô cùng ngon và bổ dưỡng
+            </strong>
+            <a href="" class="register-affilicate mt-4">
+                đăng kí nhận thông báo
+            </a>
+            <div class="post-strike-dot mt-4">
+                <span class="posted_in">Danh mục:
+                    <% categorys.forEach(item=>{%>
+                    <a href="/page/cua-hang" rel="tag"><%=item.name %></a>,
+                    <%}) %>
+
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <div class="page-shift mt-3">
+                <span class="light-choose-button">mô tả</span>
+                <span>Đánh giá</span>
+            </div>
+            <div class="content-page-shift">
+                <div class="content-page show-content-page">
+                    <%= data.product.description %>
+                </div>
+                <div class="content-page container">
+                    <div id="review_form_wrapper">
+                        <div id="review_form">
+                            <div class="review-form-inner has-border">
+                                <div id="respond" class="comment-respond">
+                                    <!-- <h3 id="reply-title" class="comment-reply-title">Hãy là người đầu tiên nhận xét
+                                        “Cam”
+                                    </h3> -->
+                                    <form action="" method="post" id="commentform" class="comment-form" novalidate="">
+                                        <div class="row">
+                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"
+                                                style="display: flex; align-items: center; justify-content:center;">
+                                                <img id="userAvatar" src="https://s.pngix.com/pngfile/s/468-4685538_bear-default-avatar-default-avatar-hd-png-download.png"
+                                                    alt="Avatar" alt="Responsive image" class="avatar img-thumbnail"
+                                                    style=" vertical-align: middle;width: 80px;height: 80px;border-radius: 50%; line-height: 80px;"
+                                                    onerror="this.src='https://s.pngix.com/pngfile/s/468-4685538_bear-default-avatar-default-avatar-hd-png-download.png'">
+                                            </div>
+                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                                <div class="rating_product_detail">
+                                                    <label for="comment">Đánh giá của bạn&nbsp;
+                                                        <span class="required">*
+
+                                                        </span>
+                                                    </label>
+                                                    <div class="rating_product_detail">
+                                                            <div class="page_product_detail">
+                                                                    <div class="page__demo">
+                                                                      <div class="page__group">  
+                                                                        <div class="rating">
+                                                                            <% [1,2,3,4,5].forEach(item=>{%>
+                                                                                <input onclick="voteProduct('<%= item %>')" type="radio" name="rating-star2" class="rating__control" id="rc<%= item %>" >
+                                                                                <%}) %>
+                                                                          <label for="rc1" class="rating__item">
+                                                                            <svg class="rating__star">
+                                                                              <use xlink:href="#star"></use>
+                                                                            </svg>
+                                                                            <span class="rating__label">1</span>
+                                                                          </label>
+                                                                          <label for="rc2" class="rating__item">
+                                                                            <svg class="rating__star">
+                                                                              <use xlink:href="#star"></use>
+                                                                            </svg>
+                                                                            <span class="rating__label">2</span>
+                                                                          </label>
+                                                                          <label for="rc3" class="rating__item">
+                                                                            <svg class="rating__star">
+                                                                              <use xlink:href="#star"></use>
+                                                                            </svg>
+                                                                            <span class="rating__label">3</span>
+                                                                          </label>
+                                                                          <label for="rc4" class="rating__item">
+                                                                            <svg class="rating__star">
+                                                                              <use xlink:href="#star"></use>
+                                                                            </svg>
+                                                                            <span class="rating__label">4</span>
+                                                                          </label>
+                                                                          <label for="rc5" class="rating__item">
+                                                                            <svg class="rating__star">
+                                                                              <use xlink:href="#star"></use>
+                                                                            </svg>
+                                                                            <span class="rating__label">5</span>
+                                                                          </label>	
+                                                                        </div>    
+                                                                        
+                                                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                  <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+                                                                    <symbol id="star" viewBox="0 0 26 28">
+                                                                      <path d="M26 10.109c0 .281-.203.547-.406.75l-5.672 5.531 1.344 7.812c.016.109.016.203.016.313 0 .406-.187.781-.641.781a1.27 1.27 0 0 1-.625-.187L13 21.422l-7.016 3.687c-.203.109-.406.187-.625.187-.453 0-.656-.375-.656-.781 0-.109.016-.203.031-.313l1.344-7.812L.39 10.859c-.187-.203-.391-.469-.391-.75 0-.469.484-.656.875-.719l7.844-1.141 3.516-7.109c.141-.297.406-.641.766-.641s.625.344.766.641l3.516 7.109 7.844 1.141c.375.063.875.25.875.719z"/>
+                                                                    </symbol>
+                                                                  </svg>
+                                                                  
+                                                    </div>
+                                                </div>
+                                                <p class="comment-form-comment">
+                                                    <label for="comment" style="clear: both;">Nhận xét của
+                                                        bạn&nbsp;
+                                                        <span class="required">*
+
+                                                        </span>
+
+                                                    </label>
+
+                                                    <textarea class="form-control" id="comment_product_detail"
+                                                        name="comment" cols="30" rows="4"
+                                                        style="width:100%;"></textarea>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <p class="form-submit">
+                                            <a href="javascript:void(0)"  onclick="addComment('<%= data.product._id %>')" style="float: right;">Bình Luận</a>
+
+                                        </p>
+
+                                        <!--list comment-->
+                                        <div class="container" id="list-comment">
+
+                                               
+                                            </div>
+                                        <div style="text-align: center;"><a href="javascript:void(0)" class="btn" style="background:#6c960a;color:white;font-weight: bold;" onclick="viewMoreComment()">Xem thêm</a></div>
+                                            <!------end list comment--------------->
+                                    </form>
+
+                                </div><!-- #respond -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-slider-lazy mt-3">
+                <h4 class="text-center">SẢN PHẨM TƯƠNG TỰ</h4>
+                <div class="owl-carousel owl-theme mt-4">
+                    <% data.listProduct.forEach(item=>{%>
+                    <a href="/page/san-pham/<%= item._id %>"><img class="owl-lazy object-fit"
+                            data-src="/product-image/<%=item.image[0] %>" alt=""></a>
+                    <%}) %>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#userAvatar').attr('src',JSON.parse(localStorage.getItem('user')).avatar);
+    let numberComment = 4;
+    function parseDate(str)
+    {
+        const date = new Date(str.substr(1,10));
+        return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}` 
+    }
+    function rateCustomer(rate)
+    {
+        switch(rate)
+        {
+            case 1:
+                return 'Rất tệ'
+                break;
+            case 2:
+                return 'Chưa hài lòng'
+                break;
+            case 3:
+                return 'Tạm được'
+                break;
+            case 4: 
+                return 'Hài lòng'
+                break;
+            case 5: 
+                return 'Rất hài lòng'
+                break
+        }
+    }
+/*---------list comment------------------*/
+    var listcomment=[];
+    function getVote(){
+        return new Promise((resolve,reject)=>{
+            $.ajax({
+            url:"/vote/danh-gia-san-pham/<%= data.product._id %>",
+            method:"GET",
+            success: res=>{
+                if(res.data){
+                    res.data.forEach(item=>{
+                    listcomment.push(item);
+                })
+                }
+             
+            },
+            error:err=>{
+                console.log(err);
+            }
+        })
+        })
+    }
+
+    function setStar(number){
+        let html='';
+        for(var i = 0 ; i < 5 ; i++){
+            if(i < number){
+                html +=`  <i class="fas fa-star" style="color:orange"></i>`
+            }
+            else{
+                html +=`  <i class="fas fa-star"></i>`
+            }
+        }
+        return html;
+    }
+    function getComment(){
+
+        return new Promise((resolve,reject)=>{
+            $.ajax({
+        url:`/binh-luan?page=SANPHAM&id=<%= data.product._id %>&amount=${numberComment}`,
+        method:'get',
+        success:(res) => {
+            res.data.forEach(item=>{
+             for(var i = 0 ; i < listcomment.length;i++){
+                    if(item.idUser._id==listcomment[i].idUser){
+                        item.numberStar=listcomment[i].numberStar;
+                    }
+                }
+            })
+            let returnCommment='';
+                res.data.map(item =>{
+                    returnCommment +=
+                `<div class="row p-3 box-comment" style="border-bottom:1px solid #ececec">
+                    <div class="col-lg-2">
+                        <div class="user-rate">
+                            <img src="/upload/avatar/${item.idUser.avatar}" width='50px' height='50px' class="rounded-circle" alt="">
+                            <p>${item.idUser.name}</p>
+                            <span>${parseDate(item.date)}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-10" style="border-left:1px solid #ececec">
+                        <div class="rate">
+                            <span class="star-rate mr-3">`;
+                                returnCommment += setStar(item.numberStar);
+                                returnCommment+=`
+                            </span>
+                            <span class="title-rate">
+                                ${rateCustomer(item.numberStar)}
+                            </span>
+                        </div>
+                        <div class="content-rate mt-3">
+                            <p>${item.content}
+                            </p>
+                        </div>
+                    </div>
+                </div>`
+                }
+             )
+                $('#list-comment').html(returnCommment);
+        },
+        error: err => {
+            console.log(err);
+        }
+    })
+        })
+    }
+
+    getVote()
+    .then(
+        getComment()
+    );
+   /*---------add comment-----------*/ 
+   function addComment(id){
+       const user = JSON.parse(localStorage.getItem('user'));
+       const content = $('#comment_product_detail').val();
+       if(content == '')
+       {
+           window.prompt('Bạn cần nhập nội dung trước')
+       }
+       else
+       {
+        if(user != null)
+       {
+           console.log(starCommentCurren);
+           $.ajax({
+               url:`/binh-luan/them-binh-luan`,
+               method:'post',
+               dataType:'json',
+                data: {
+                   idUser:user._id,
+                   idPageComment:id,
+                   pageComment:'SANPHAM',
+                   content:content
+               },
+               success:res => {
+                let html = '';
+                html +=
+                 `<div class="row p-3 box-comment" style="border-bottom:1px solid #ececec">
+                    <div class="col-lg-2">
+                        <div class="user-rate">
+                            <img src="${user.avatar}" width='50px' height='50px' class="rounded-circle" alt="">
+                            <p>${user.name}</p>
+                            <span>${parseDate(res.data.date)}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-10" style="border-left:1px solid #ececec">
+                        <div class="rate">
+                            <span class="star-rate mr-3">`;
+                                html += setStar(starCommentCurren);
+                                html+=`
+                            </span>
+                            <span class="title-rate">
+                                ${rateCustomer(4)}
+                            </span>
+                         
+                        </div>
+                        <div class="content-rate mt-3">
+                            <p>${res.data.content}
+                            </p>
+                        </div>
+                    </div>
+                </div>` ;
+                 $('#list-comment').prepend(html);
+                $('#comment_product_detail').val('');
+               },
+               error: err => {
+                   console.log(err);
+               }
+           })
+       }
+   }
+       }
+      
+   /*--------end add comment-----------------*/
+
+   /*------ view more comment---------------*/
+   function viewMoreComment(){
+    $.ajax({
+        url:`/binh-luan?page=SANPHAM&id=<%= data.product._id %>&amount=4&skip=${numberComment}`,
+        method:'get',
+        success: res => {
+            res.data.forEach(item=>{
+             for(var i = 0 ; i < listcomment.length;i++){
+                    if(item.idUser._id==listcomment[i].idUser){
+                        item.numberStar=listcomment[i].numberStar;
+                    }
+                }
+            })
+            let html = '';
+                res.data.map(item => {
+                    console.log(item)
+                    html+=
+                `<div class="row p-3 box-comment" style="border-bottom:1px solid #ececec">
+                    <div class="col-lg-2">
+                        <div class="user-rate">
+                            <img src="/upload/avatar/${item.idUser.avatar}" width='50px' height='50px' class="rounded-circle" alt="">
+                            <p>${item.idUser.name}</p>
+                            <span>${parseDate(item.date)}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-10" style="border-left:1px solid #ececec">
+                        <div class="rate">
+                            <span class="star-rate mr-3">`
+                                html += setStar(item.numberStar);
+                                html+=`
+                            </span>
+                            <span class="title-rate">
+                                ${rateCustomer(item.numberStar)}
+                            </span>
+                            </div>
+                            <div class="content-rate mt-3">
+                            <p>${item.content}
+                            </p>
+                        </div>
+                    </div>
+                </div>`})
+                $('#list-comment').append(html)
+                numberComment+=4;
+        },
+        error: err => {
+            console.log(err);
+        }
+   })
+}
+   /*-------end view more comment----------------------------*/
+
+   /*------add to cart--------*/
+   function addToCart(item){
+       const number = $('#result').val();
+       const product = JSON.parse(item);
+       product.numberItem = number;
+       const cart = JSON.parse(localStorage.getItem('cart')) ;
+       if(cart == null)
+       {
+           localStorage.setItem('cart',JSON.stringify([{...product}]));
+       }
+       else
+       {
+           let flag = 0;
+            cart.forEach(item=>{
+                if(item._id == product._id)
+                {
+                    item.numberItem = parseInt(item.numberItem);
+                    item.numberItem += +number;
+                    flag = 1;
+                }
+            })
+            if( flag == 1)
+            {
+                localStorage.setItem('cart',JSON.stringify(cart));
+            }
+            if(flag == 0)
+            {
+                const newCart = [...cart,{...product}];
+                localStorage.setItem('cart',JSON.stringify(newCart));
+            }
+           
+       }
+       updateNumberItem();
+        $('.alert').fadeIn(0);
+        $('.alert').fadeOut(4000);
+   }
+   /*-----end add to cart-------------*/
+   $("#comment_product_detail").on('keyup', function (e) {
+        if (e.keyCode === 13) {
+            addComment('<%= data.product._id %>');
+        }
+    });
+
+    /*-----vote product------------*/
+    var starCommentCurren = 0;
+    function voteProduct(vote)
+    {   
+        $.ajax({
+            method:'post',
+            url:'/vote',
+            dataType:'json',
+            data:{
+                idUser:JSON.parse(localStorage.getItem('user'))._id,
+                idProduct:'<%= data.product._id %>',
+                numberStar:vote
+            },
+            success: res => {
+               starCommentCurren =res.data.numberStar;
+            },
+            error: err => {
+                console.log(err);
+            }            
+        })
+    }
+    // set hình ảnh đã xem vào local
+    $(document).ready(function(){
+            console.log("data ne",  `<%=data.product%>`);
+
+            if(localStorage.getItem('viewedProducts')){
+                let data =JSON.parse(localStorage.getItem('viewedProducts'));
+                let flag=0;
+                for(var i = 0 ; i< data.length ; i++){
+                    if(data[i]._id==window.location.pathname.slice(15)){
+                       flag=1;
+                    }
+                  
+                }
+                if(flag==0){//nhớ là ==0
+                    let data =JSON.parse(localStorage.getItem('viewedProducts'));
+                    if(data.length>3)
+                    {
+                        data.pop(1);
+                    }
+                    data.unshift({"image":$('.img-width-full-size').attr('src'),"name":`<%=data.product.name%>`,"_id":`<%=data.product._id%>`,"description":`<%=data.product.description%>`,"price":`<%=data.product.price%>`});
+                    localStorage.setItem('viewedProducts',JSON.stringify(data))
+                }   
+               
+            }
+            else{
+                let data=[{"image":$('.img-width-full-size').attr('src'),"name":`<%=data.product.name%>`,"_id":`<%=data.product._id%>`,"description":`<%=data.product.description%>`,"price":`<%=data.product.price%>`}];
+                localStorage.setItem('viewedProducts',JSON.stringify(data))
+            }
+      
+    })
+    /*-----vote product-----------------------*/
+</script>

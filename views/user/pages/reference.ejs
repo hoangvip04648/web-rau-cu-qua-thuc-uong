@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="row mt-5 mb-3">
+        <div class="col-3 responsive-sidebar ">
+            <div class="listPost">
+                <div class="title">
+                    <span>Bài viết mới</span>
+                </div>
+                <ul>
+
+                    <% references.forEach((item,index) => {%>
+                    <li>
+                        <div class="left res-img" style="background:url('<%=item.image%>')">
+                        </div>
+                        <a href="/page/tham-khao/<%= item._id %>">
+                            <div class="right">
+                                <span><%= item.title %></span>
+                            </div>
+                        </a>
+                    </li>
+                    <%}) %>
+                    
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-lg-9">
+            <div class="row mb-3">
+
+                <% references.forEach((item,index) => {%>
+                <div class=" col-md-4 col-sm-6 mb-3">
+                    <div class="baiViet">
+                        <a href="/page/tham-khao/<%= item._id %>">
+                            <div class="post ">
+                                <div class="pic">
+                                    <img class=" "
+                                        src="<%= item.image %>"
+                                        alt="<%= item.description %>">
+                                </div>
+                                <div class="date text-center">
+                                    <span></span>
+                                    <p style="line-height: 31px;">2019</p>
+                                </div>
+                                <div class="content ">
+                                    <h5><%= item.title %></h5>
+                                    <div class="gachKe"></div>
+                                    <div class="noiDung">
+                                        <p><%= item.description %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <%}) %>
+                
+            </div>
+        </div>   
+    </div>
+</div>
+   
